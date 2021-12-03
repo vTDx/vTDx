@@ -1,0 +1,10 @@
+@import url("./colors.scss");
+@import url("./elements.scss");
+@import url("./misc.scss");
+@import url("./var.scss");
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Roboto", sans-serif;
+}
