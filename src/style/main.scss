@@ -1,7 +1,9 @@
-@import url("./colors.scss");
+/*@import url("./colors.scss");*/
 @import url("./elements.scss");
 @import url("./misc.scss");
 @import url("./var.scss");
+@import url("./sidebar.scss");
+@import url("./page.scss");
 
 body {
   background: var(--bg);

@@ -1,0 +1,49 @@
+div.sidebar button.option span.material-icons {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+div.sidebar button.option * {
+  vertical-align: middle;
+}
+
+div.sidebar button.option {
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  color: var(--fg);
+  font-size: 16px;
+  width: calc(var(--sidebar-width) - calc(var(--sidebar-padding) * 2));
+  transition: color 0.3s, background 0.3s, opacity 0.3s;
+  padding: 5px;
+  border-radius: 0.25em;
+}
+
+div.sidebar button.option:hover {
+  color: var(--blue);
+  background: #0001;
+}
+
+div.sidebar button.option:active {
+  background: #0002;
+}
+
+div.sidebar button.page.option.unselected {
+    opacity: 0.3;
+}
+
+div.sidebar button.page.option.selected {
+    opacity: 1;
+}
+
+div.sidebar button.page.option.fast-opacity-tran {
+    transition:color 0.3s, background 0.3s, opacity 0.1s;
+}
+
+div.sidebar button.option span.material-icons {
+    transition: color 0.3s;
+}
+
+div.sidebar button.option.action:hover {
+    opacity: 1;
+}
