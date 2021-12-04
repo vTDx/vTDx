@@ -7,7 +7,7 @@ export const actions = new Map<string, action>([
       dispName: "New Note",
       materialIcon: "add_circle",
       action: () => {
-        alert("hello");
+        alert("Not implemented!");
       },
       color: colors.purple,
     },
@@ -18,7 +18,7 @@ export const actions = new Map<string, action>([
       dispName: "New Todo",
       materialIcon: "note_add",
       action: () => {
-        alert("hello");
+        alert("Not implemented!");
       },
       color: colors.orange,
     },

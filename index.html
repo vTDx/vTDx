@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vTDx</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>vTDx</title>
-</head>
+  <body>
+    <div class="sidebar">
+      <span id="pages"></span>
+      <h3>Actions</h3>
+      <span id="actions"></span>
+    </div>
+    <div class="content" id="target">
+      <div id="page-home" class="page hidden">
+        <div class="centered-absolute">
+          <h1 class="bold big nomargin">
+            <span class="blue">v</span>TD<span class="gray">x</span>
+          </h1>
+          <p class="nomargin gray">The right way to store notes.</p>
+          <br />
+        </div>
+      </div>
+      <div id="page-allnotes" class="page hidden">
+        <h1>all notes</h1>
+      </div>
+      <div id="page-pinned" class="page hidden">
+        <h1>pinned notes</h1>
+      </div>
+      <div id="page-todo" class="page hidden">
+        <h1>todo</h1>
+      </div>
+    </div>
+    <div class="headerbar">
+      <!--Probably SVG in the future-->
+      <h1 class="header">
+        <span class="blue">v</span>TD<span class="gray">x</span>
+      </h1>
+    </div>
 
-<body>
-  <div class="sidebar">
-    <span id="pages"></span>
-    <h3>Actions</h3>
-    <span id="actions"></span>
-  </div>
-  <div class="content" id="target">
-    <div id="page-dashboard" class="page hidden">
-      <h1>Dashboard</h1>
-    </div>
-    <div id="page-allnotes" class="page hidden">
-      <h1>all notes</h1>
-    </div>
-    <div id="page-pinned" class="page hidden">
-      <h1>pinned notes</h1>
-    </div>
-    <div id="page-todo" class="page hidden">
-      <h1>todo</h1>
-    </div>
-  </div>
-  <div class="headerbar">
-    <!--Probably SVG in the future-->
-    <h1 class="header">
-      <span class="blue">v</span>TD<span class="gray">x</span>
-    </h1>
-  </div>
-
-  <noscript class="page-holder" id="page-error">
-    <h1>
-      Unable to load page
-    </h1>
-    <p>
-      Element "<span id="page-error-queryselector"></span>" is undefined.<br><br>
-      Please try reloading the page.
-    </p>
-  </noscript>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    <noscript class="page-holder" id="page-error">
+      <h1>Unable to load page</h1>
+      <p>
+        Element "<span id="page-error-queryselector"></span>" is undefined.<br /><br />
+        Please try reloading the page.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

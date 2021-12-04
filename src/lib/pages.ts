@@ -2,12 +2,13 @@ import { colors, page } from "./ui";
 
 export const pages = new Map<string, page>([
   [
-    "dashboard",
+    "home",
     {
-      dispName: "Dashboard",
-      materialIcon: "dashboard",
+      dispName: "Home",
+      materialIcon: "home",
       onSidebar: true,
       color: colors.blue,
+      default:true
     },
   ],
   [

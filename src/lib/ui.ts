@@ -26,6 +26,7 @@ export interface page {
   materialIcon: string;
   onSidebar: boolean;
   color: colors;
+  default?:boolean;
 }
 
 export interface action {
