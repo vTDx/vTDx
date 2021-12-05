@@ -2,7 +2,7 @@ import { colors } from "./ui";
 import { pages } from "./pages";
 
 class PM {
-  switch(page: string, button: HTMLElement) {
+  switch(page: string, button?: HTMLElement) {
     const target = document.getElementById("target")!;
     const pgHTML = document.getElementById(`page-${page}`);
     const erHTML = document.getElementById("page-error")!;
@@ -41,7 +41,13 @@ class PM {
       )!.innerText = `div#page-${page}`;
     }
 
-    document.title = `vTDx - ${pages.get(page)?.dispName}`
+    document.title = `vTDx - ${pages.get(page)?.dispName}`;
+
+    document.getElementById("page-dot")!.style.color = `var(--${
+      colors[pages.get(page)?.color!]
+    })`;
+    document.getElementById("page-disp")!.innerText =
+      pages.get(page)?.dispName!;
   }
 }
 

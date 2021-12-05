@@ -23,6 +23,19 @@
       <h3>Actions</h3>
       <span id="actions"></span>
     </div>
+    <div class="headerbar">
+      <!--Probably SVG in the future-->
+      <h1 class="header">
+        <span class="blue">v</span>TD<span class="gray">x</span>
+      </h1>
+      <div class="page-display">
+        <h3>
+          <span id="page-dot">●</span>
+          <span id="page-disp">page</span>
+        </h3>
+      </div>
+      
+    </div>
     <div class="content" id="target">
       <div id="page-home" class="page hidden">
         <div class="centered-absolute">
@@ -42,13 +55,15 @@
       <div id="page-todo" class="page hidden">
         <h1>todo</h1>
       </div>
+      <div id="page-newnote" class="page hidden">
+        <p>Title:</p>
+        <input class="fullwidth" id="new-note-title">
+        <p>Content:</p>
+        <textarea class="fullwidth" id="new-note-content"></textarea>
+        <button id="new-note-create">Create</button>
+      </div>
     </div>
-    <div class="headerbar">
-      <!--Probably SVG in the future-->
-      <h1 class="header">
-        <span class="blue">v</span>TD<span class="gray">x</span>
-      </h1>
-    </div>
+
 
     <noscript class="page-holder" id="page-error">
       <h1>Unable to load page</h1>

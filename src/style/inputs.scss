@@ -1,0 +1,48 @@
+input,
+textarea {
+  border: none;
+  border-radius: 0.4em;
+  background-color: #ffffff06;
+  color: var(--fg);
+  padding: 10px;
+  transition: background 0.3s, opacity 0.3s, border-bottom 0.2s;
+  border-bottom: #00000030 2px solid;
+}
+
+input:hover,
+textarea:hover {
+  border-bottom: #ffffff10 2px solid;
+}
+
+input:focus,
+textarea:focus {
+  border-bottom: var(--blue) 2px solid;
+}
+
+div#page-home input *,
+div#page-home textarea * {
+  vertical-align: middle;
+}
+
+div#page-home input + input,
+div#page-home textarea + textarea {
+  margin-left: 10px;
+}
+
+div.content input.fullwidth,div.content textarea.fullwidth {
+  width:calc(100% - calc(var(--content-padding) / 2));
+}
+
+div.content input {
+  margin-bottom:10px;
+}
+
+div.content textarea#new-note-content {
+  height: calc(100vh - 300px);
+}
+
+div.content button#new-note-create {
+  position:absolute;
+  top:var(--content-padding);
+  right:calc(var(--content-padding) / 2 + 4px);
+}

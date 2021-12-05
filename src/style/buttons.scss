@@ -1,34 +1,37 @@
 button {
-    border:none;
-    border-radius: .4em;
-    background-color: #0001;
-    color:var(--fg);
-    padding:10px;
-    transition:background 0.3s;
+  border: none;
+  border-radius: 0.4em;
+  background-color: #0001;
+  color: var(--fg);
+  padding: 10px;
+  transition: background 0.3s, opacity 0.3s, border-bottom 0.2s;
+  border-bottom: #00000030 2px solid;
 }
 
 button:hover {
-    background: #ffffff02;
+  background: #ffffff02;
+  border-bottom: #ffffff10 2px solid;
 }
 
 button:active {
-    background:#0004;
+  background: #0004;
+  border-bottom: var(--blue) 2px solid;
 }
 
 div#page-home button {
-    width: 125px;
-    height:100px;
-    vertical-align:middle;
+  width: 125px;
+  height: 100px;
+  vertical-align: middle;
 }
 
 div#page-home button p {
-    margin-top:5px;
+  margin-top: 5px;
 }
 
 div#page-home button * {
-    vertical-align:middle;
+  vertical-align: middle;
 }
 
-div#page-home button+button {
-    margin-left:10px;
+div#page-home button + button {
+  margin-left: 10px;
 }

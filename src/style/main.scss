@@ -1,4 +1,3 @@
-/*@import url("./colors.scss");*/
 @import url("./elements.scss");
 @import url("./misc.scss");
 @import url("./var.scss");
@@ -6,9 +5,19 @@
 @import url("./page.scss");
 @import url("./buttons.scss");
 @import url("./notes.scss");
+@import url("./scrollbars.scss");
+@import url("./headerbar.scss");
+@import url("./inputs.scss");
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  outline: none !important;
+  user-select: none;
 }

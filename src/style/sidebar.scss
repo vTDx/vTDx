@@ -5,6 +5,7 @@ div.sidebar button.option span.material-icons {
 
 div.sidebar button.option * {
   vertical-align: middle;
+  transition: color 0.1s;
 }
 
 div.sidebar button.option {
@@ -20,8 +21,9 @@ div.sidebar button.option {
 }
 
 div.sidebar button.option:hover {
-  color: var(--blue);
-  background: #0001;
+  //color: var(--blue);
+  background: #ffffff06;
+  opacity: 0.7 !important;
 }
 
 div.sidebar button.option:active {
@@ -29,21 +31,17 @@ div.sidebar button.option:active {
 }
 
 div.sidebar button.page.option.unselected {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 div.sidebar button.page.option.selected {
-    opacity: 1;
+  opacity: 1;
 }
 
 div.sidebar button.page.option.fast-opacity-tran {
-    transition:color 0.3s, background 0.3s, opacity 0.1s;
+  transition: color 0.1s, background 0.3s, opacity 0.1s;
 }
 
-div.sidebar button.option span.material-icons {
-    transition: color 0.3s;
-}
-
-div.sidebar button.option.action:hover {
-    opacity: 1;
+div.sidebar button.option span {
+  transition: color 0.1s;
 }

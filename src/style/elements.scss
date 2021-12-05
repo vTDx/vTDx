@@ -1,5 +1,4 @@
 div.headerbar {
-  position: fixed;
   top: 0px;
   left: 0px;
   width: calc(100% - calc(var(--topbar-padding) * 2));
@@ -7,6 +6,7 @@ div.headerbar {
   padding: var(--topbar-padding);
   background-color: var(--topbar-bg);
   box-shadow: var(--topbar-box-shadow);
+  position: relative;
 }
 
 div.sidebar {
@@ -16,12 +16,7 @@ div.sidebar {
   width: calc(var(--sidebar-width) - calc(var(--sidebar-padding) * 2));
   height: calc(100vh - 70px - calc(var(--sidebar-padding) * 2));
   background: var(--sidebar-bg);
-  padding:var(--sidebar-padding);
-}
-
-div.headerbar h1.header {
-  margin-top: 8px;
-  margin-left: 10px;
+  padding: var(--sidebar-padding);
 }
 
 div.content {
@@ -31,4 +26,5 @@ div.content {
   width: calc(100% - var(--sidebar-width) - calc(var(--content-padding) * 2));
   height: calc(100vh - 70px - calc(var(--content-padding) * 2));
   padding: var(--sidebar-padding);
+  overflow-y: scroll;
 }

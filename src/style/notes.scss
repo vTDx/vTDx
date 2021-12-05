@@ -5,7 +5,7 @@ div.note {
   height: max-content;
   position: relative;
   border-bottom: #fff1 2px solid;
-  padding-bottom:1.2em;
+  padding-bottom: 1.2em;
 }
 
 div.note .header {
@@ -17,33 +17,37 @@ div.note .content {
 }
 
 div.note button {
-    position:absolute;
-    top:10px;
-    padding:0;
-    background: none;
-    transition:color 0.3s, opacity 0.3s;
+  position: absolute;
+  top: 10px;
+  padding: 0;
+  background: none;
+  transition: color 0.3s, opacity 0.3s;
 }
 
 div.note button:active {
-    opacity: 0.75;
+  opacity: 0.75;
 }
 
 div.note button.delete {
-    right:40px;
+  right: 40px;
 }
 
 div.note button.delete:hover {
-    color:var(--red);
+  color: var(--red);
 }
 
-div.note button.bookmark {
-    right:5px;
+div.note button.pin {
+  right: 5px;
 }
 
-div.note button.bookmark:hover {
-    color:var(--green);
+div.note button.pin:hover {
+  color: var(--green);
 }
 
 div.note .content {
-    margin-top:10px;
+  margin-top: 10px;
+}
+
+div.note button.pin.unpin:hover {
+  color: var(--red);
 }

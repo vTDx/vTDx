@@ -11,7 +11,9 @@ class SBUI {
       if (page[1].onSidebar) {
         const icon = document.createElement("span");
         const button = document.createElement("button");
-        const text = document.createTextNode(page[1].dispName);
+        const text = document.createElement("span");
+
+        text.innerText = page[1].dispName;
 
         icon.innerText = page[1].materialIcon;
         icon.className = "material-icons";
@@ -24,6 +26,14 @@ class SBUI {
         button.addEventListener("click", () =>
           PageManagement.switch(page[0], button)
         );
+        button.addEventListener("mouseenter", () => {
+          icon.style.color = `var(--${colors[page[1].color]})`;
+          text.style.color = `var(--${colors[page[1].color]})`;
+        });
+        button.addEventListener("mouseleave", () => {
+          icon.style.color = ``;
+          text.style.color = ``;
+        });
 
         sidebar?.append(button);
       }
@@ -36,8 +46,10 @@ class SBUI {
     for (const action of actions) {
       const icon = document.createElement("span");
       const button = document.createElement("button");
-      const text = document.createTextNode(action[1].dispName);
+      const text = document.createElement("span");
       const id = `${Math.floor(Math.random() * 32768)}`;
+
+      text.innerText = action[1].dispName;
 
       icon.innerText = action[1].materialIcon;
       icon.className = "material-icons";
@@ -49,10 +61,12 @@ class SBUI {
       button.append(text);
       button.addEventListener("click", action[1].action);
       button.addEventListener("mouseenter", () => {
-        icon.style.color = `var(--${colors[action[1].color]}`;
+        icon.style.color = `var(--${colors[action[1].color]})`;
+        text.style.color = `var(--${colors[action[1].color]})`;
       });
       button.addEventListener("mouseleave", () => {
         icon.style.color = ``;
+        text.style.color = ``;
       });
 
       sidebar?.append(button);

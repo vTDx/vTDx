@@ -1,6 +1,6 @@
-import { colors, action } from "./ui";
+import { colors, Action } from "./ui";
 
-export const actions = new Map<string, action>([
+export const actions = new Map<string, Action>([
   [
     "newnote",
     {
@@ -23,4 +23,17 @@ export const actions = new Map<string, action>([
       color: colors.orange,
     },
   ],
+  [
+    "clearall",
+    {
+      dispName: "Clear All Notes",
+      materialIcon: "delete",
+      action: () => {
+        if (confirm("Are you sure you want to clear all notes?\n\nDoing this will clear all notes without return.")) {
+          localStorage.removeItem("notestore");
+        }
+      },
+      color: colors.red,
+    },
+  ]
 ]);

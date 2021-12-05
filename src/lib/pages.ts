@@ -1,6 +1,6 @@
-import { colors, page } from "./ui";
+import { colors, Page } from "./ui";
 
-export const pages = new Map<string, page>([
+export const pages = new Map<string, Page>([
   [
     "home",
     {
@@ -8,7 +8,7 @@ export const pages = new Map<string, page>([
       materialIcon: "home",
       onSidebar: true,
       color: colors.blue,
-      default:true
+      default: true,
     },
   ],
   [
@@ -39,12 +39,21 @@ export const pages = new Map<string, page>([
     },
   ],
   [
-      "settings",
-      {
-          dispName:"Settings",
-          materialIcon:"settings",
-          onSidebar:false,
-          color:colors.gray
-      }
-  ]
+    "settings",
+    {
+      dispName: "Settings",
+      materialIcon: "settings",
+      onSidebar: false,
+      color: colors.gray,
+    },
+  ],
+  [
+    "newnote",
+    {
+      dispName: "New Note",
+      materialIcon: "add_circle",
+      onSidebar: false,
+      color: colors.aqua,
+    },
+  ],
 ]);
