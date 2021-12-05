@@ -1,0 +1,49 @@
+div.note {
+  padding: 0.7em;
+  //background: #f0f;
+  width: calc(100% - var(--content-padding));
+  height: max-content;
+  position: relative;
+  border-bottom: #fff1 2px solid;
+  padding-bottom:1.2em;
+}
+
+div.note .header {
+  margin: 0;
+}
+
+div.note .content {
+  margin: 0;
+}
+
+div.note button {
+    position:absolute;
+    top:10px;
+    padding:0;
+    background: none;
+    transition:color 0.3s, opacity 0.3s;
+}
+
+div.note button:active {
+    opacity: 0.75;
+}
+
+div.note button.delete {
+    right:40px;
+}
+
+div.note button.delete:hover {
+    color:var(--red);
+}
+
+div.note button.bookmark {
+    right:5px;
+}
+
+div.note button.bookmark:hover {
+    color:var(--green);
+}
+
+div.note .content {
+    margin-top:10px;
+}
