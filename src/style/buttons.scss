@@ -35,3 +35,7 @@ div#page-home button * {
 div#page-home button + button {
   margin-left: 10px;
 }
+
+button+button {
+  margin-left:5px;
+}

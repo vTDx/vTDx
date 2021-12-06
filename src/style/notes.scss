@@ -22,6 +22,8 @@ div.note button {
   padding: 0;
   background: none;
   transition: color 0.3s, opacity 0.3s;
+  border-bottom:none !important;
+  background: none !important;
 }
 
 div.note button:active {

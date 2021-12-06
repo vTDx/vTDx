@@ -1,11 +1,10 @@
 import { colors } from "./ui";
 import { pages } from "./pages";
+import { Error, ErrorManagement } from "./error";
 
 class PM {
   switch(page: string, button?: HTMLElement) {
-    const target = document.getElementById("target")!;
     const pgHTML = document.getElementById(`page-${page}`);
-    const erHTML = document.getElementById("page-error")!;
     const buttons = document.querySelectorAll("div.sidebar>#pages>button");
 
     for (let i = 0; i < buttons.length; i++) {
@@ -23,31 +22,41 @@ class PM {
       }
     }
 
-    if (pgHTML && pages.has(page)) {
-      const pages = document.querySelectorAll("div.page");
+    let dispName:string = `Page Not Found: ${pages.get(page)?.dispName || "Unknown Page"}`;
+    let colorValue:string = "var(--red)";
 
-      for (let i = 0; i < pages.length; i++) {
-        if (pages[i] != pgHTML) {
-          pages[i].classList.add("hidden");
+    if (pgHTML && pages.has(page)) {
+      const pagedivs = document.querySelectorAll("div.page");
+
+      for (let i = 0; i < pagedivs.length; i++) {
+        if (pagedivs[i] != pgHTML) {
+          pagedivs[i].classList.add("hidden");
           continue;
         }
-        pages[i].classList.remove("hidden");
+        pagedivs[i].classList.remove("hidden");
       }
+
+      colorValue = `var(--${colors[pages.get(page)?.color!]})`;
+      dispName = pages.get(page)?.dispName!;
+      document.title = `vTDx - ${pages.get(page)?.dispName}`;
     } else {
-      target.innerHTML = erHTML?.innerHTML;
-
-      document.getElementById(
-        "page-error-queryselector"
-      )!.innerText = `div#page-${page}`;
-    }
-
-    document.title = `vTDx - ${pages.get(page)?.dispName}`;
-
-    document.getElementById("page-dot")!.style.color = `var(--${
-      colors[pages.get(page)?.color!]
-    })`;
-    document.getElementById("page-disp")!.innerText =
-      pages.get(page)?.dispName!;
+      this.switch("error");
+      const data:Error = {
+        message:"The requested page does not have a HTML Node.",
+        materialIcon:"web_asset_off",
+        buttonCaption:"Go Home",
+        buttonAction:() => {
+          this.switch("home",document.getElementById("button-page-home")!);
+        },
+        id:"page-error"
+      }
+      ErrorManagement.newError(data);
+      document.getElementById("page-dot")!.style.color = colorValue;
+      document.getElementById("page-disp")!.innerText = dispName;
+      document.title = `vTDx - Page Not Found`;
+    }    
+    document.getElementById("page-dot")!.style.color = colorValue;
+    document.getElementById("page-disp")!.innerText = dispName;
   }
 }
 

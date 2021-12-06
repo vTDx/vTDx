@@ -48,12 +48,12 @@ export const pages = new Map<string, Page>([
     },
   ],
   [
-    "newnote",
+    "error",
     {
-      dispName: "New Note",
-      materialIcon: "add_circle",
+      dispName: "Error",
+      materialIcon: "error",
       onSidebar: false,
-      color: colors.aqua,
+      color: colors.red,
     },
   ],
 ]);

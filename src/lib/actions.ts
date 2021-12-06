@@ -1,3 +1,4 @@
+import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { colors, Action } from "./ui";
 
 export const actions = new Map<string, Action>([
@@ -7,7 +8,7 @@ export const actions = new Map<string, Action>([
       dispName: "New Note",
       materialIcon: "add_circle",
       action: () => {
-        alert("Not implemented!");
+        NewNoteDialog.show(dialogTypes.note,true);
       },
       color: colors.purple,
     },

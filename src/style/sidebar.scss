@@ -20,6 +20,10 @@ div.sidebar button.option {
   border-radius: 0.25em;
 }
 
+div.sidebar button.option+button {
+  margin-left:0;
+}
+
 div.sidebar button.option:hover {
   //color: var(--blue);
   background: #ffffff06;

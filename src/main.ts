@@ -1,3 +1,4 @@
+import { NewNoteDialog } from './lib/newnotedialog';
 import { NoteManagement } from './lib/notes';
 import { PageManagement } from './lib/page';
 import { HomePageUserInterface } from './lib/pages/home';
@@ -6,6 +7,8 @@ import { UserInterface } from './lib/ui'
 import './style/main.scss'
 
 const startPage = "home";
+
+NewNoteDialog.init();
 
 SideBarUI.populateActions();
 SideBarUI.populatePages();

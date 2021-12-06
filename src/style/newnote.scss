@@ -1,0 +1,49 @@
+div#create-note-dialog,
+div#create-note-dialog-shade {
+    transition:opacity 0.3s, visibility 0.3s;
+}
+
+div#create-note-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  padding: 20px;
+  min-width: 400px;
+  border-radius: 0.4em;
+  background-color: var(--bg);
+  box-shadow: 0 0 18px #121212aa;
+}
+
+div#create-note-dialog-shade {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #0003;
+}
+
+div#create-note-dialog .fullwidth {
+  width: calc(100% - 20px);
+}
+
+div#create-note-dialog textarea {
+  margin-bottom: 4em;
+  min-width: 470px;
+  min-height: 100px;
+}
+
+div#create-note-dialog .nomargin {
+  margin-bottom: 5px;
+}
+
+div#create-note-dialog.hidden,
+div#create-note-dialog-shade.hidden {
+  opacity: 0;
+  visibility: hidden;
+}

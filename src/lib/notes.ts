@@ -1,5 +1,6 @@
 import { ErrorManagement } from "./error";
 import { Error } from "./error";
+import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { PageManagement } from "./page";
 class NM {
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
@@ -15,12 +16,12 @@ class NM {
 
     if (!notes.length) {
       const messageData: Error = {
-        materialIcon: "warning",
+        materialIcon: "description",
         message: "You have no notes.",
         id: "page-allnotes",
         buttonCaption: "Create a note",
         buttonAction: () => {
-          PageManagement.switch("newnote")
+          NewNoteDialog.show(dialogTypes.note,true);
         },
       };
       ErrorManagement.newError(messageData);
@@ -178,28 +179,12 @@ class NM {
 
     target.append(note);
   }
-
-  showCreateNoteDialog(type:getUserInputDialogTargets, action:() => void) {
-    const titleField = document.getElementById("new-note-title") as HTMLInputElement;
-    const contentField = document.getElementById("new-note-content") as HTMLTextAreaElement;
-    const button = document.getElementById("new-note-create");
-
-    button?.addEventListener("click",action)
-    
-    titleField.value = "";
-    contentField.value = "";
-  }
 }
 
 export interface Note {
   title: string;
   content: string;
   pinned: boolean;
-}
-
-export enum getUserInputDialogTargets { 
-  todo,
-  note
 }
 
 export const NoteManagement = new NM();
