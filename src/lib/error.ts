@@ -28,6 +28,55 @@ class EM {
 
     target.append(div);
   }
+
+  toast(data:ToastData) {
+    const title = data.title;
+    const text = data.text;
+    const delay = data.delay || 0;
+    const toastDiv = document.getElementById("toast-div")!;
+    const titleDiv = document.getElementById("toast-title")!;
+    const cntntDiv = document.getElementById("toast-content")!;
+
+    toastDiv?.classList.remove("hidden");
+    titleDiv.innerText = title;
+    cntntDiv.innerText = text;
+
+    if (delay) {
+      setTimeout(this.hideToast, delay);
+    }
+  }
+
+  init() {
+    const toast = document.createElement("div");
+    const title = document.createElement("h3");
+    const cntnt = document.createElement("p");
+
+    toast.className = "toast hidden";
+    toast.id = "toast-div";
+
+    title.innerText = "{{title}}";
+    title.className = "nomargin";
+    title.id = "toast-title";
+
+    cntnt.innerText = "{{content}}";
+    cntnt.className = "nomargin";
+    cntnt.id = "toast-content";
+
+    toast.append(title,cntnt);
+
+    document.body.append(toast);
+  }
+
+  hideToast() {
+    const toastDiv = document.getElementById("toast-div")!;
+    const titleDiv = document.getElementById("toast-title")!;
+    const cntntDiv = document.getElementById("toast-content")!;
+
+    titleDiv.innerText = "";
+    cntntDiv.innerText = "";
+
+    toastDiv.classList.add("hidden");
+  }
 }
 
 export const ErrorManagement = new EM();
@@ -38,4 +87,11 @@ export interface Error {
   buttonCaption: string;
   buttonAction: () => void;
   id: string;
+}
+
+export interface ToastData {
+  text:string;
+  title:string;
+  delay?:number;
+
 }

@@ -30,12 +30,21 @@ export const pages = new Map<string, Page>([
     },
   ],
   [
-    "todo",
+    "task",
     {
-      dispName: "ToDo",
+      dispName: "All Tasks",
       materialIcon: "task",
       onSidebar: true,
       color: colors.orange,
+    },
+  ],
+  [
+    "unftasks",
+    {
+      dispName: "Unfinished Tasks",
+      materialIcon: "file_open",
+      onSidebar: true,
+      color: colors.aqua,
     },
   ],
   [

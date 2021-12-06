@@ -1,0 +1,20 @@
+div.toast#toast-div {
+    position:fixed;
+    bottom:40px;
+    right:40px;
+    background: #0003;
+    backdrop-filter: blur(30px);
+    padding:10px;
+    border-radius: 5px;
+    min-width:250px;
+    box-shadow: 0 0 18px #121212aa;
+    transition:bottom 0.3s, opacity 0.3s, visibility 0.3s;
+    opacity: 1;
+    visibility: visible;
+}
+
+div.toast#toast-div.hidden {
+    bottom:-30px;
+    opacity: 0;
+    visibility:hidden;
+}

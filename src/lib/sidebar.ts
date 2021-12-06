@@ -70,6 +70,9 @@ class SBUI {
       });
 
       sidebar?.append(button);
+      if (action[1].addBreak) {
+        sidebar?.append(document.createElement("hr"));
+      }
     }
   }
 

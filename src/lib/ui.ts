@@ -36,6 +36,7 @@ export interface Action {
   page?: string;
   action: () => void;
   color: colors;
+  addBreak?:boolean;
 }
 
 export const UserInterface = new UI();

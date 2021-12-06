@@ -1,0 +1,52 @@
+div.task {
+  padding: 0.7em;
+  width: calc(100% - var(--content-padding));
+  height: max-content;
+  position: relative;
+  border-bottom: #fff1 2px solid;
+  padding-bottom: 1.2em;
+}
+
+div.task .header {
+  margin: 0;
+  max-width:calc(100% - var(--sidebar-width) - var(--content-padding) + 185px);
+  overflow-x: hidden;
+}
+
+div.task .content {
+  margin: 0;
+}
+
+div.task button {
+  position: absolute;
+  top: 10px;
+  padding: 0;
+  background: none;
+  transition: color 0.3s, opacity 0.3s;
+  border-bottom: none !important;
+  background: none !important;
+}
+
+div.task button:active {
+  opacity: 0.75;
+}
+
+div.task button.delete {
+  right: 5px;
+}
+
+div.task button.delete:hover {
+  color: var(--red);
+}
+
+div.task .content {
+  margin-top: 10px;
+}
+
+div.task button.finish {
+  right: 40px;
+}
+
+div.task button.finish:hover {
+  color: var(--blue);
+}
