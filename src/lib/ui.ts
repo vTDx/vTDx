@@ -4,8 +4,9 @@ class UI {
       const colorString = colors[color];
       const rule = `.${colorString} { color: var(--${colorString}); }`;
 
-      document.styleSheets[0].insertRule(rule, 0);
-      console.log(rule);
+      try {
+        document.styleSheets[0].insertRule(rule, 0);
+      } catch {}
     }
   }
 }

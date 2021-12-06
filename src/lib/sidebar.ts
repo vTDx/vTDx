@@ -5,7 +5,7 @@ import { actions } from "./actions";
 
 class SBUI {
   populatePages() {
-    const sidebar = document.querySelector("div.sidebar>span#pages");
+    const sidebar = document.querySelector("div.sidebar>div#pages");
 
     for (const page of pages) {
       if (page[1].onSidebar) {
@@ -41,7 +41,7 @@ class SBUI {
   }
 
   populateActions() {
-    const sidebar = document.querySelector("div.sidebar>span#actions");
+    const sidebar = document.querySelector("div.sidebar>div#actions");
 
     for (const action of actions) {
       const icon = document.createElement("span");
@@ -70,6 +70,44 @@ class SBUI {
       });
 
       sidebar?.append(button);
+    }
+  }
+
+  toggleSidebar() {
+    const sidebarCollapsed = localStorage.getItem("sidebar-collapsed") || "false";
+
+    if (sidebarCollapsed == "true") {
+      SideBarUI.expandSidebar();
+    } else {
+      SideBarUI.collapseSidebar();
+    }
+  }
+
+  expandSidebar() {
+    document.body.classList.remove("sidebar-collapsed");
+
+    localStorage.setItem("sidebar-collapsed","false");
+  }
+
+  collapseSidebar() {
+    document.body.classList.add("sidebar-collapsed");
+
+    localStorage.setItem("sidebar-collapsed","true");
+  }
+
+  init() {  
+    this.syncSidebarState();
+    
+    document.getElementById("sidebar-toggle")!.addEventListener("click", () => {SideBarUI.toggleSidebar(); SideBarUI.syncSidebarState()})
+  }
+
+  syncSidebarState() {
+    const sidebarCollapsed = localStorage.getItem("sidebar-collapsed") || "false";
+
+    if (sidebarCollapsed == "true") {
+      SideBarUI.collapseSidebar();
+    } else {
+      SideBarUI.expandSidebar();
     }
   }
 }

@@ -1,0 +1,35 @@
+@media screen and (max-width:600px) {
+    div#create-note-dialog {
+        position:fixed;
+        left:0px;
+        top: var(--topbar-height);
+        height: calc(100vh - 70px - calc(20px * 2));
+        width:calc(100% - 40px);
+        transform:unset;
+        -o-transform:unset;
+        -ms-transform:unset;
+        -moz-transform:unset;
+        -webkit-transform:unset;
+        min-width:unset;
+
+        box-shadow:unset;
+        border-radius:0;
+    }
+
+    div#create-note-dialog-shade {
+        display:none;
+    }
+
+    div#create-note-dialog textarea {
+        resize: none;
+        min-width:unset;
+        height: calc(100% - 225px);
+        margin-bottom:10px;
+    }
+
+    div#create-note-dialog .bottomright {
+        position:unset !important;
+        display:block;
+        right:unset;
+    }
+}

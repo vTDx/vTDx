@@ -18,23 +18,27 @@ div.headerbar #page-dot {
   transition: color 0.1s;
 }
 
-div.headerbar button.settings {
+div.headerbar button.action {
     padding:0;
     margin:0;
     margin-right:20px;
     background: transparent;
     transition:color 0.3s, opacity 0.3s;
+    border-bottom:none;
 
 }
 
-div.headerbar button.settings:hover {
+div.headerbar button.action:hover {
     color: var(--purple);
+    border-bottom:none;
+    background-color: transparent;
 }
 
-div.headerbar button.settings:active {
+div.headerbar button.action:active {
     opacity: 0.6;
+    border-bottom:none;
 }
 
-div.headerbar button.settings span.material-icons {
+div.headerbar button.action span.material-icons {
     font-size:18px;
 }

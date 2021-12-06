@@ -1,0 +1,30 @@
+@media screen and (max-width: 600px) {
+  * {
+    --sidebar-width: 90px;
+  }
+
+  div.sidebar button > span:not(span.material-icons) {
+    visibility: hidden;
+    opacity: 0;
+    font-size: 0px;
+    position: fixed;
+  }
+
+  div.sidebar h3 {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  div.sidebar button {
+    display: block;
+  }
+
+  div.sidebar button:hover,
+  div.sidebar button:active {
+    background: none !important;
+  }
+
+  button.action#sidebar-toggle {
+      display:none;
+  }
+}

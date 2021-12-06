@@ -7,6 +7,7 @@ div.headerbar {
   background-color: var(--topbar-bg);
   box-shadow: var(--topbar-box-shadow);
   position: relative;
+  transition:width 0.3s;
 }
 
 div.sidebar {
@@ -17,6 +18,13 @@ div.sidebar {
   height: calc(100vh - 70px - calc(var(--sidebar-padding) * 2));
   background: var(--sidebar-bg);
   padding: var(--sidebar-padding);
+  overflow-x:hidden;
+  word-wrap: none;
+  transition:width 0.3s;
+}
+
+div.sidebar * {
+  transition:opacity 0.3s, visibility 0.3s;
 }
 
 div.content {
@@ -27,4 +35,5 @@ div.content {
   height: calc(100vh - 70px - calc(var(--content-padding) * 2));
   padding: var(--sidebar-padding);
   overflow-y: scroll;
+  transition:width 0.3s, left 0.3s;
 }

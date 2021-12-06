@@ -20,8 +20,8 @@ div.sidebar button.option {
   border-radius: 0.25em;
 }
 
-div.sidebar button.option+button {
-  margin-left:0;
+div.sidebar button.option + button {
+  margin-left: 0;
 }
 
 div.sidebar button.option:hover {
@@ -47,5 +47,30 @@ div.sidebar button.page.option.fast-opacity-tran {
 }
 
 div.sidebar button.option span {
-  transition: color 0.1s;
+  transition: color 0.1s, opacity 0.3s, visibility 0.3s;
+}
+
+body.sidebar-collapsed * {
+  --sidebar-width: 90px;
+}
+
+body.sidebar-collapsed div.sidebar button > span:not(span.material-icons) {
+  visibility: hidden;
+  opacity: 0;
+  font-size: 0px;
+  position: fixed;
+}
+
+body.sidebar-collapsed div.sidebar h3 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+body.sidebar-collapsed div.sidebar button {
+  display: block;
+}
+
+body.sidebar-collapsed div.sidebar button:hover,
+body.sidebar-collapsed div.sidebar button:active {
+  background: none !important;
 }
