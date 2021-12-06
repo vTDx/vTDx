@@ -28,6 +28,7 @@ export interface Page {
   onSidebar: boolean;
   color: colors;
   default?: boolean;
+  addBreak?:boolean;
 }
 
 export interface Action {

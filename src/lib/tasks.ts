@@ -61,6 +61,37 @@ class TDM {
     }
   }
 
+  populateFinishedTasksPage(clear?:boolean,target?:HTMLElement) {
+    if (!target) target = document.getElementById("page-fintasks")!;
+
+    if (target) {
+      if (clear) target.innerHTML = "";
+
+      const tasks = this.gettasks();
+      let finishedTaskCount = 0;
+  
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].finished) {
+          this.displaytask(i, target);
+          finishedTaskCount++;
+        }
+      }
+  
+      if (!finishedTaskCount) {
+        const messageData: Error = {
+          materialIcon: "warning",
+          message: "You haven't completed any of your tasks!",
+          id: "page-fintasks",
+          buttonCaption: "Goto your tasks",
+          buttonAction: () => {
+            PageManagement.switch("task",document.getElementById("button-page-task")!);
+          },
+        };
+        ErrorManagement.newError(messageData);
+      }
+    }
+  }  
+
   createtask(text: string) {
     let json: task[] = this.gettasks();
 
@@ -136,6 +167,12 @@ class TDM {
 
     if (i <= json.length) {
       json.splice(i, 1);
+
+      ErrorManagement.toast({
+        text: `Task #${i+1} deleted.`,
+        title: "",
+        delay: 3000,
+      });
     }
 
     localStorage.setItem("taskstore", JSON.stringify(json));
@@ -144,6 +181,7 @@ class TDM {
   refreshAll() {
     this.populatetaskPage(true);
     this.populateUnFinishedTasksPage(true);
+    this.populateFinishedTasksPage(true);
   }
 
   toggletaskFinished(i: number) {
@@ -163,6 +201,12 @@ class TDM {
 
     if (i <= data.length) {
       data[i]!.finished = false;
+
+      ErrorManagement.toast({
+        text: `Marked task #${i+1} as unfinished.`,
+        title: "",
+        delay: 3000,
+      });
     }
 
     localStorage.setItem("taskstore", JSON.stringify(data));
@@ -173,6 +217,12 @@ class TDM {
 
     if (i <= data.length) {
       data[i]!.finished = true;
+
+      ErrorManagement.toast({
+        text: `Marked task #${i+1} as finished.`,
+        title: "",
+        delay: 3000,
+      });
     }
 
     localStorage.setItem("taskstore", JSON.stringify(data));
@@ -184,6 +234,12 @@ class TDM {
     for (let i=0;i<data.length;i++) {
       data[i]!.finished = true;
     }
+
+    ErrorManagement.toast({
+      text: `Marked all tasks as finished.`,
+      title: "",
+      delay: 3000,
+    });
 
     localStorage.setItem("taskstore", JSON.stringify(data));
 

@@ -99,7 +99,7 @@ class NND {
       if (dialogTypes[type] == "task") {
         contentInput.style.display = "none";
         (paraphs[1] as HTMLParagraphElement).style.display = "none";
-        titleInput.style.marginBottom = "40px";
+        titleInput.style.marginBottom = "50px";
         createButton.addEventListener("click", this.processtask);
         (paraphs[0] as HTMLParagraphElement).innerText = "Content";
       } else {
@@ -131,6 +131,11 @@ class NND {
     if (titleInput.value && contentInput.value) {
       NoteManagement.createNote(titleInput.value, contentInput.value);
       NewNoteDialog.hide();
+      ErrorManagement.toast({
+        text: "Note created!",
+        title: "",
+        delay: 3000,
+      });
     } else {
       ErrorManagement.toast({
         text: "title or content fields are not filled out.",

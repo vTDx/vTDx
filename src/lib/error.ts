@@ -29,21 +29,25 @@ class EM {
     target.append(div);
   }
 
-  toast(data:ToastData) {
-    const title = data.title;
-    const text = data.text;
-    const delay = data.delay || 0;
-    const toastDiv = document.getElementById("toast-div")!;
-    const titleDiv = document.getElementById("toast-title")!;
-    const cntntDiv = document.getElementById("toast-content")!;
+  toast(data: ToastData) {
+    clearTimeout(this.toastTimeout);
+    this.hideToast();
+    setTimeout(() => {
+      const title = data.title;
+      const text = data.text;
+      const delay = data.delay || 0;
+      const toastDiv = document.getElementById("toast-div")!;
+      const titleDiv = document.getElementById("toast-title")!;
+      const cntntDiv = document.getElementById("toast-content")!;
 
-    toastDiv?.classList.remove("hidden");
-    titleDiv.innerText = title;
-    cntntDiv.innerText = text;
+      toastDiv?.classList.remove("hidden");
+      titleDiv.innerText = title;
+      cntntDiv.innerText = text;
 
-    if (delay) {
-      setTimeout(this.hideToast, delay);
-    }
+      if (delay) {
+        this.toastTimeout = setTimeout(this.hideToast, delay);
+      }
+    }, 250);
   }
 
   init() {
@@ -62,21 +66,18 @@ class EM {
     cntnt.className = "nomargin";
     cntnt.id = "toast-content";
 
-    toast.append(title,cntnt);
+    toast.append(title, cntnt);
 
     document.body.append(toast);
   }
 
   hideToast() {
     const toastDiv = document.getElementById("toast-div")!;
-    const titleDiv = document.getElementById("toast-title")!;
-    const cntntDiv = document.getElementById("toast-content")!;
-
-    titleDiv.innerText = "";
-    cntntDiv.innerText = "";
 
     toastDiv.classList.add("hidden");
   }
+
+  toastTimeout: any;
 }
 
 export const ErrorManagement = new EM();
@@ -90,8 +91,7 @@ export interface Error {
 }
 
 export interface ToastData {
-  text:string;
-  title:string;
-  delay?:number;
-
+  text: string;
+  title: string;
+  delay?: number;
 }

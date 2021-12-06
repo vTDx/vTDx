@@ -20,6 +20,7 @@ class SBUI {
 
         button.className = "page unselected option";
         button.id = `button-page-${page[0]}`;
+        button.title = page[1].dispName;
 
         button.append(icon);
         button.append(text);
@@ -36,6 +37,9 @@ class SBUI {
         });
 
         sidebar?.append(button);
+        if (page[1].addBreak) {
+          sidebar?.append(document.createElement("hr"));
+        }
       }
     }
   }
@@ -56,6 +60,7 @@ class SBUI {
       icon.id = id;
 
       button.className = "action option";
+      button.title = action[1].dispName;
 
       button.append(icon);
       button.append(text);

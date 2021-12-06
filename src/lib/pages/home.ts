@@ -10,10 +10,10 @@ class HPUI {
       if (page[1].onSidebar && !page[1].default) {
         const button = document.createElement("button");
         const icon = document.createElement("span");
-        const textHolder = document.createElement("p");
+        const textHolder = document.createElement("span");
         const text = document.createTextNode(page[1].dispName);
 
-        icon.className = "material-icons big";
+        icon.className = "material-icons";
         icon.innerText = page[1].materialIcon;
 
         textHolder.className = "nomargin";
@@ -29,6 +29,9 @@ class HPUI {
         });
 
         target[0].append(button);
+        if (page[1].addBreak) {
+          target[0].append(document.createElement("hr"));
+        }
       }
     }
   }

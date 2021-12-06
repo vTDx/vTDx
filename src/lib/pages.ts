@@ -9,6 +9,7 @@ export const pages = new Map<string, Page>([
       onSidebar: true,
       color: colors.blue,
       default: true,
+      addBreak:true
     },
   ],
   [
@@ -27,15 +28,16 @@ export const pages = new Map<string, Page>([
       materialIcon: "bookmark",
       onSidebar: true,
       color: colors.green,
+      addBreak:true
     },
   ],
   [
     "task",
     {
       dispName: "All Tasks",
-      materialIcon: "task",
+      materialIcon: "insert_drive_file",
       onSidebar: true,
-      color: colors.orange,
+      color: colors.yellow,
     },
   ],
   [
@@ -44,7 +46,16 @@ export const pages = new Map<string, Page>([
       dispName: "Unfinished Tasks",
       materialIcon: "file_open",
       onSidebar: true,
-      color: colors.aqua,
+      color: colors.orange,
+    },
+  ],
+  [
+    "fintasks",
+    {
+      dispName: "Finished Tasks",
+      materialIcon: "task",
+      onSidebar: true,
+      color: colors.green,
     },
   ],
   [

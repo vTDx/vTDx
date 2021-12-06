@@ -33,11 +33,11 @@ PageManagement.switch(startPage,document.getElementById(`button-page-${startPage
 
 // Populate home screen buttons
 HomePageUserInterface.populateHomeButtons();
-
+/*  
 async function test() {
     for (let i=0;i<20;i++) {
         taskManagement.createtask(`titleltlttiuiiele ${Math.floor(Math.random() * (i*1000))}`);
     }
 }
 
-test(); 
+test();  */
