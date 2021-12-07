@@ -29,6 +29,7 @@ export interface Page {
   color: colors;
   default?: boolean;
   addBreak?:boolean;
+  hasCountableContent?:boolean;
 }
 
 export interface Action {

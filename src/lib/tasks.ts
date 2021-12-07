@@ -3,6 +3,38 @@ import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { PageManagement } from "./page";
 
 class TDM {
+  countFinished(): number {
+    let pinned = 0;
+
+    const data = this.gettasks();
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i]!.pinned) pinned++;
+    }
+
+    return pinned;
+  }
+
+  countUnfinished(): number {
+    let pinned = this.countFinished();
+
+    const data = this.gettasks();
+
+    return data.length - pinned;
+  }
+
+  countTasks():number {
+    let tasks = 0;
+
+    const data = this.gettasks();
+
+    for (let i = 0; i < data.length; i++) {
+      tasks++;
+    }
+
+    return tasks;
+  }
+
   populatetaskPage(clear?: boolean, target?: HTMLElement) {
     if (!target) target = document.getElementById("page-task")!;
 
@@ -182,6 +214,8 @@ class TDM {
     this.populatetaskPage(true);
     this.populateUnFinishedTasksPage(true);
     this.populateFinishedTasksPage(true);
+
+    console.log(`Finished: ${this.countFinished()} | Unfinished: ${this.countUnfinished()} | Tasks: ${this.countTasks()}`);
   }
 
   toggletaskFinished(i: number) {

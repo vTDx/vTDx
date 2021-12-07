@@ -3,6 +3,39 @@ import { Error } from "./error";
 import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { PageManagement } from "./page";
 class NM {
+  countPinned(): number {
+    let pinned = 0;
+
+    const data = this.getNotes();
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i]!.pinned) pinned++;
+    }
+
+    return pinned;
+  }
+
+  countUnpinned(): number {
+    let pinned = this.countPinned();
+
+    const data = this.getNotes();
+
+    return data.length - pinned;
+  }
+
+
+  countNotes():number {
+    let notes = 0;
+
+    const data = this.getNotes();
+
+    for (let i = 0; i < data.length; i++) {
+      notes++;
+    }
+
+    return notes;
+  }
+
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
     if (!target) target = document.getElementById("page-allnotes")!;
 
@@ -21,7 +54,7 @@ class NM {
         id: "page-allnotes",
         buttonCaption: "Create a note",
         buttonAction: () => {
-          NewNoteDialog.show(dialogTypes.note,true);
+          NewNoteDialog.show(dialogTypes.note, true);
         },
       };
       ErrorManagement.newError(messageData);
@@ -64,6 +97,7 @@ class NM {
   refreshAll() {
     this.populateAllNotes(true);
     this.populatePinnedNotes(true);
+    console.log(`Pinned: ${this.countPinned()} | Unpinned: ${this.countUnpinned()} | Notes: ${this.countNotes()}`);
   }
 
   createNote(title: string, content: string) {

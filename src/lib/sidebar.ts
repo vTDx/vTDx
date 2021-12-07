@@ -40,6 +40,14 @@ class SBUI {
         if (page[1].addBreak) {
           sidebar?.append(document.createElement("hr"));
         }
+
+        if (page[1].hasCountableContent) {
+          const numberSpan = document.createElement("span");
+          numberSpan.className = "counter";
+          numberSpan.innerText = "?";
+
+          button.append(numberSpan);
+        }
       }
     }
   }

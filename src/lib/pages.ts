@@ -19,6 +19,7 @@ export const pages = new Map<string, Page>([
       materialIcon: "apps",
       onSidebar: true,
       color: colors.purple,
+      hasCountableContent:true,
     },
   ],
   [
@@ -28,7 +29,8 @@ export const pages = new Map<string, Page>([
       materialIcon: "bookmark",
       onSidebar: true,
       color: colors.green,
-      addBreak:true
+      addBreak:true,
+      hasCountableContent:true,
     },
   ],
   [
@@ -38,6 +40,7 @@ export const pages = new Map<string, Page>([
       materialIcon: "insert_drive_file",
       onSidebar: true,
       color: colors.yellow,
+      hasCountableContent:true,
     },
   ],
   [
@@ -47,6 +50,7 @@ export const pages = new Map<string, Page>([
       materialIcon: "file_open",
       onSidebar: true,
       color: colors.orange,
+      hasCountableContent:true,
     },
   ],
   [
@@ -56,6 +60,7 @@ export const pages = new Map<string, Page>([
       materialIcon: "task",
       onSidebar: true,
       color: colors.green,
+      hasCountableContent:true,
     },
   ],
   [
