@@ -34,10 +34,13 @@ class TSUI {
       }
 
       applyButton.className = "apply";
-      applyButton.innerText = `Select`;
+      applyButton.innerText = localStorage.getItem("theme") == themes[i][0]?`Applied`:`Apply`;
       applyButton.addEventListener("click", () => {
         ThemeManagement.applyTheme(themes[i][0], true);
       });
+      if (localStorage.getItem("theme") == themes[i][0]) {
+          applyButton.setAttribute("disabled","true");
+      }
 
       colorPreviewDiv.className = "color-preview";
 

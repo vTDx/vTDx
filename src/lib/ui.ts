@@ -30,6 +30,7 @@ export interface Page {
   default?: boolean;
   addBreak?:boolean;
   hasCountableContent?:boolean;
+  onHome?:boolean;
 }
 
 export interface Action {

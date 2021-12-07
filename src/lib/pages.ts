@@ -9,17 +9,19 @@ export const pages = new Map<string, Page>([
       onSidebar: true,
       color: colors.blue,
       default: true,
-      addBreak:true
+      addBreak:true,
+      onHome:false,
     },
   ],
   [
     "allnotes",
     {
-      dispName: "All Notes",
-      materialIcon: "apps",
+      dispName: "Notes",
+      materialIcon: "description",
       onSidebar: true,
       color: colors.purple,
       hasCountableContent:true,
+      onHome:true,
     },
   ],
   [
@@ -31,16 +33,18 @@ export const pages = new Map<string, Page>([
       color: colors.green,
       addBreak:true,
       hasCountableContent:true,
+      onHome:true,
     },
   ],
   [
     "task",
     {
-      dispName: "All Tasks",
+      dispName: "Tasks",
       materialIcon: "insert_drive_file",
       onSidebar: true,
       color: colors.yellow,
       hasCountableContent:true,
+      onHome:true,
     },
   ],
   [
@@ -51,6 +55,7 @@ export const pages = new Map<string, Page>([
       onSidebar: true,
       color: colors.orange,
       hasCountableContent:true,
+      onHome:true,
     },
   ],
   [
@@ -62,6 +67,7 @@ export const pages = new Map<string, Page>([
       color: colors.green,
       hasCountableContent:true,
       addBreak:true,
+      onHome:true,
     },
   ],
   [
@@ -70,7 +76,8 @@ export const pages = new Map<string, Page>([
       dispName: "Themes",
       materialIcon:"palette",
       onSidebar:true,
-      color:colors.purple
+      color:colors.purple,
+      onHome:true,
     }
   ],
   [

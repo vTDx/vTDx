@@ -20,7 +20,7 @@ export const actions = new Map<string, Action>([
     "clearall",
     {
       dispName: "Clear All Notes",
-      materialIcon: "delete",
+      materialIcon: "clear_all",
       action: () => {
         if (
           confirm(

@@ -19,15 +19,14 @@ button:active {
 }
 
 div#page-home button {
-  display:block;
-  width: 300px;
+  width: 125px;
+  height: 100px;
   vertical-align: middle;
-  text-align: left;
-  border-bottom:unset !important;
+  margin-bottom:10px;
 }
 
-div#page-home button span.material-icons {
-  margin-right: 10px;
+div#page-home button p {
+  margin-top: 5px;
 }
 
 div#page-home button * {
@@ -35,8 +34,7 @@ div#page-home button * {
 }
 
 div#page-home button + button {
-  margin-top: 10px;
-  margin-left:unset;
+  margin-left: 10px;
 }
 
 div#page-home hr {
@@ -45,4 +43,8 @@ div#page-home hr {
 
 button+button {
   margin-left:5px;
+}
+
+button:disabled {
+  opacity: 0.5;
 }
