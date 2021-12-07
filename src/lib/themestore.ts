@@ -49,8 +49,8 @@ export const themeStore = new Map<string,Theme>(
                 aqua:"#8fbcbb",
                 orange:"#d0a770",
                 gray:"rgb(109,109,109)",
-                bg:"rgb(46,52,64)",
-                fg:"rgb(216,222,233)"
+                fg:"rgb(216,222,233)",
+                bg:"rgb(46,52,64)"
             },
             userSelectable:true
         }],
@@ -66,8 +66,93 @@ export const themeStore = new Map<string,Theme>(
                 aqua:"#89ddff",
                 orange:"#f78c6c",
                 gray:"#546e7a",
+                fg:"#B0BEC5",
                 bg:"#263238",
-                fg:"#B0BEC5"
+            },
+            userSelectable:true
+        }],
+        ["dracula", {
+            name:"Dracula",
+            author:"Zeno Rocha",
+            colors: {
+                red:"#ff5555",
+                green:"#50FA7B",
+                yellow:"#F1FA8C",
+                blue:"#BD93F9",
+                purple:"#BD93F9",
+                aqua:"#8BE9FD",
+                orange:"#FFB86C",
+                gray:"#555",
+                fg:"#A4A4A1",
+                bg:"#282A36",
+            },
+            userSelectable:true
+        }],
+        ["nightowl", {
+            name:"Night Owl",
+            author:"GitHub/sdras",
+            colors: {
+                red:"#EF5350",
+                green:"#22da6e",
+                yellow:"#c5e478",
+                blue:"#82AAFF",
+                purple:"#C792EA",
+                aqua:"#21c7a8",
+                orange:"#FFB458",
+                gray:"#637777",
+                fg:"#d6deeb",
+                bg:"#011627",
+            },
+            userSelectable:true
+        }],
+        ["monokaipro", {
+            name:"Monokai Extended",
+            author:"SuperPaintman",
+            colors: {
+                red:"#F92672",
+                green:"#A6E22E",
+                yellow:"#E6DB74",
+                blue:"#66D9EF",
+                purple:"#AE81FF",
+                aqua:"#21c7a8",
+                orange:"#FFB458",
+                gray:"#75715E",
+                fg:"#F8F8F2",
+                bg:"#272822",
+            },
+            userSelectable:true
+        }],
+        ["palenight", {
+            name:"Pale Night",
+            author:"Olaolu Olawuyi",
+            colors: {
+                red:"#ff5572",
+                green:"#a9c77d",
+                yellow:"#FFCB6B",
+                blue:"#82AAFF",
+                purple:"#C792EA",
+                aqua:"#89DDFF",
+                orange:"#FFB42A",
+                gray:"#697098",
+                fg:"#BFC7D5",
+                bg:"#292D3E",
+            },
+            userSelectable:true
+        }],
+        ["atomonedark", {
+            name:"Atom One Dark",
+            author:"Atom",
+            colors: {
+                red:"#E06C75",
+                green:"#98C379",
+                yellow:"#E5C07B",
+                blue:"#61AFEF",
+                purple:"#C678DD",
+                aqua:"#56B6C2",
+                orange:"#c48e49",
+                gray:"#51565f",
+                fg:"#ABB2BF",
+                bg:"#282C34",
             },
             userSelectable:true
         }],
