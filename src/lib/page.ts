@@ -14,7 +14,7 @@ class PM {
       );
 
       if (buttons[i] == button) {
-        buttons[i].children[0].classList.add(colors[pages.get(page)?.color!]);
+        buttons[i].children[0].classList.add(colors[pages.get(page)!.color!]);
       } else {
         for (const color in colors) {
           buttons[i].children[0].classList.remove(colors[color]);
@@ -23,7 +23,7 @@ class PM {
     }
 
     let dispName: string = `Page Not Found: ${
-      pages.get(page)?.dispName || "Unknown Page"
+      pages.get(page)!.dispName || "Unknown Page"
     }`;
     let colorValue: string = "var(--red)";
 
@@ -39,8 +39,8 @@ class PM {
       }
 
       colorValue = `var(--${colors[pages.get(page)?.color!]})`;
-      dispName = pages.get(page)?.dispName!;
-      document.title = `vTDx - ${pages.get(page)?.dispName}`;
+      dispName = pages.get(page)!.dispName!;
+      document.title = `vTDx - ${pages.get(page)!.dispName}`;
     } else {
       this.switch("error");
       const data: Error = {

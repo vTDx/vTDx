@@ -20,7 +20,7 @@ div.sidebar {
   padding: var(--sidebar-padding);
   overflow-x:hidden;
   word-wrap: none;
-  transition:width 0.3s;
+  transition:width 0.3s, padding 0.3s;
 }
 
 div.sidebar * {

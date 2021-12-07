@@ -66,12 +66,12 @@ class NND {
     if (this.initDone) {
       const titleInput = (document.querySelector(
         "div#create-note-dialog input"
-      ) as HTMLInputElement)!;
+      ) as HTMLInputElement);
       const contentInput = (document.querySelector(
         "div#create-note-dialog textarea"
-      ) as HTMLTextAreaElement)!;
-      const shade = document.getElementById("create-note-dialog-shade")!;
-      const dialog = document.getElementById("create-note-dialog")!;
+      ) as HTMLTextAreaElement);
+      const shade = document.getElementById("create-note-dialog-shade");
+      const dialog = document.getElementById("create-note-dialog");
       const header = document.querySelector(
         "div#create-note-dialog h3"
       ) as HTMLElement;
@@ -93,9 +93,10 @@ class NND {
 
       createButton.innerText = `Create ${typeName}`;
 
-      shade.classList.remove("hidden");
-      dialog.classList.remove("hidden");
+      shade!.classList.remove("hidden");
+      dialog!.classList.remove("hidden");
 
+      console.log(dialogTypes[type]);
       if (dialogTypes[type] == "task") {
         contentInput.style.display = "none";
         (paraphs[1] as HTMLParagraphElement).style.display = "none";
@@ -113,20 +114,20 @@ class NND {
   }
 
   hide() {
-    const shade = document.getElementById("create-note-dialog-shade")!;
-    const dialog = document.getElementById("create-note-dialog")!;
+    const shade = document.getElementById("create-note-dialog-shade");
+    const dialog = document.getElementById("create-note-dialog");
 
-    shade.classList.add("hidden");
-    dialog.classList.add("hidden");
+    shade?.classList.add("hidden");
+    dialog?.classList.add("hidden");
   }
 
   processNote() {
     const titleInput = (document.querySelector(
       "div#create-note-dialog input"
-    ) as HTMLInputElement)!;
+    ) as HTMLInputElement);
     const contentInput = (document.querySelector(
       "div#create-note-dialog textarea"
-    ) as HTMLTextAreaElement)!;
+    ) as HTMLTextAreaElement);
 
     if (titleInput.value && contentInput.value) {
       NoteManagement.createNote(titleInput.value, contentInput.value);
@@ -149,7 +150,7 @@ class NND {
   processtask() {
     const titleInput = (document.querySelector(
       "div#create-note-dialog input"
-    ) as HTMLInputElement)!;
+    ) as HTMLInputElement);
 
     if (titleInput.value) {
       taskManagement.createtask(titleInput.value);
@@ -165,12 +166,12 @@ class NND {
     taskManagement.refreshAll();
   }
 
-  initDone: boolean = false;
+  initDone = false;
 }
 
 const typeNames = new Map<string, string>([
   ["note", "Note"],
-  ["task", "task"],
+  ["task", "Task"],
 ]);
 
 export enum dialogTypes {

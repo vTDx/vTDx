@@ -1,10 +1,10 @@
 class EM {
   newError(data: Error) {
-    const id = data.id;
-    const message = data.message;
+    const id = data!.id;
+    const message = data!.message;
 
-    let target = document.getElementById(id!);
-    if (!target) target = document.getElementById("page-allnotes")!;
+    let target = document.getElementById(id);
+    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
 
     target.innerHTML = "";
 
@@ -36,11 +36,11 @@ class EM {
       const title = data.title;
       const text = data.text;
       const delay = data.delay || 0;
-      const toastDiv = document.getElementById("toast-div")!;
-      const titleDiv = document.getElementById("toast-title")!;
-      const cntntDiv = document.getElementById("toast-content")!;
+      const toastDiv = document.getElementById("toast-div") || document.createElement("div");
+      const titleDiv = document.getElementById("toast-title") || document.createElement("div");
+      const cntntDiv = document.getElementById("toast-content") || document.createElement("div");
 
-      toastDiv?.classList.remove("hidden");
+      toastDiv!.classList.remove("hidden");
       titleDiv.innerText = title;
       cntntDiv.innerText = text;
 
@@ -72,12 +72,12 @@ class EM {
   }
 
   hideToast() {
-    const toastDiv = document.getElementById("toast-div")!;
+    const toastDiv = document.getElementById("toast-div") || document.createElement("div");
 
     toastDiv.classList.add("hidden");
   }
 
-  toastTimeout: any;
+  toastTimeout = 0;
 }
 
 export const ErrorManagement = new EM();

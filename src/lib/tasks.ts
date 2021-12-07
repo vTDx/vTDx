@@ -4,49 +4,39 @@ import { PageManagement } from "./page";
 
 class TDM {
   countFinished(): number {
-    let pinned = 0;
+    let counter = 0;
 
     const data = this.gettasks();
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i]!.pinned) pinned++;
+      if (data[i]?.finished) counter++;
     }
 
-    return pinned;
+    return counter;
   }
 
   countUnfinished(): number {
-    let pinned = this.countFinished();
+    const counter = this.countFinished();
 
-    const data = this.gettasks();
-
-    return data.length - pinned;
+    return this.gettasks().length - counter;
   }
 
-  countTasks():number {
-    let tasks = 0;
-
-    const data = this.gettasks();
-
-    for (let i = 0; i < data.length; i++) {
-      tasks++;
-    }
-
-    return tasks;
+  countTasks(): number {
+    return this.gettasks().length;
   }
 
   populatetaskPage(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-task")!;
+    if (!target) target = document.getElementById("page-task") || document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
       const tasks = this.gettasks();
-  
+
       for (let i = 0; i < tasks.length; i++) {
         this.displaytask(i, target);
       }
-  
+
       if (!tasks.length) {
         const messageData: Error = {
           materialIcon: "task",
@@ -62,22 +52,22 @@ class TDM {
     }
   }
 
-  populateUnFinishedTasksPage(clear?:boolean,target?:HTMLElement) {
-    if (!target) target = document.getElementById("page-unftasks")!;
+  populateUnFinishedTasksPage(clear?: boolean, target?: HTMLElement) {
+    if (!target) target = document.getElementById("page-unftasks") || document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
       const tasks = this.gettasks();
       let unfinishedTaskCount = 0;
-  
+
       for (let i = 0; i < tasks.length; i++) {
         if (!tasks[i].finished) {
           this.displaytask(i, target);
           unfinishedTaskCount++;
         }
       }
-  
+
       if (!unfinishedTaskCount) {
         const messageData: Error = {
           materialIcon: "task",
@@ -85,7 +75,10 @@ class TDM {
           id: "page-unftasks",
           buttonCaption: "Goto your tasks",
           buttonAction: () => {
-            PageManagement.switch("task",document.getElementById("button-page-task")!);
+            PageManagement.switch(
+              "task",
+              document.getElementById("button-page-task") || document.createElement("div")
+            );
           },
         };
         ErrorManagement.newError(messageData);
@@ -93,22 +86,22 @@ class TDM {
     }
   }
 
-  populateFinishedTasksPage(clear?:boolean,target?:HTMLElement) {
-    if (!target) target = document.getElementById("page-fintasks")!;
+  populateFinishedTasksPage(clear?: boolean, target?: HTMLElement) {
+    if (!target) target = document.getElementById("page-fintasks") || document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
       const tasks = this.gettasks();
       let finishedTaskCount = 0;
-  
+
       for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].finished) {
           this.displaytask(i, target);
           finishedTaskCount++;
         }
       }
-  
+
       if (!finishedTaskCount) {
         const messageData: Error = {
           materialIcon: "warning",
@@ -116,16 +109,19 @@ class TDM {
           id: "page-fintasks",
           buttonCaption: "Goto your tasks",
           buttonAction: () => {
-            PageManagement.switch("task",document.getElementById("button-page-task")!);
+            PageManagement.switch(
+             "task",
+              document.getElementById("button-page-task") || document.createElement("div")
+            );
           },
         };
         ErrorManagement.newError(messageData);
       }
     }
-  }  
+  }
 
   createtask(text: string) {
-    let json: task[] = this.gettasks();
+    const json: task[] = this.gettasks();
 
     const data: task = {
       text,
@@ -140,11 +136,11 @@ class TDM {
   displaytask(i: number, target: HTMLElement) {
     const tasks = this.gettasks();
     if (i <= tasks.length) {
-      if (!target) target = document.getElementById("page-task")!;
+      if (!target) target = document.getElementById("page-task") || document.createElement("div");
 
       const task = document.createElement("div");
       const header = document.createElement("p");
-      const headerText = document.createTextNode(tasks[i]!.text);
+      const headerText = document.createTextNode(tasks[i]?.text);
       const deleteButton = document.createElement("button");
       const deleteButtonIcon = document.createElement("span");
       const finishedButton = document.createElement("button");
@@ -189,7 +185,7 @@ class TDM {
   }
 
   gettasks() {
-    let tasks = JSON.parse(localStorage.getItem("taskstore")!) || [];
+    const tasks = JSON.parse(localStorage.getItem("taskstore")!) || [];
 
     return tasks;
   }
@@ -201,7 +197,7 @@ class TDM {
       json.splice(i, 1);
 
       ErrorManagement.toast({
-        text: `Task #${i+1} deleted.`,
+        text: `Task #${i + 1} deleted.`,
         title: "",
         delay: 3000,
       });
@@ -215,14 +211,30 @@ class TDM {
     this.populateUnFinishedTasksPage(true);
     this.populateFinishedTasksPage(true);
 
-    console.log(`Finished: ${this.countFinished()} | Unfinished: ${this.countUnfinished()} | Tasks: ${this.countTasks()}`);
+    console.log(
+      `Finished: ${this.countFinished()} | Unfinished: ${this.countUnfinished()} | Tasks: ${this.countTasks()}`
+    );
+
+    const tasksCounter = (document.querySelector(
+      "button#button-page-task span.counter"
+    ) || document.createElement("div")) as HTMLSpanElement;
+    const finishedTasksCounter = (document.querySelector(
+      "button#button-page-fintasks span.counter"
+    ) || document.createElement("div")) as HTMLSpanElement;
+    const unfinishedTasksCounter = (document.querySelector(
+      "button#button-page-unftasks span.counter"
+    ) || document.createElement("div")) as HTMLSpanElement;
+
+    tasksCounter.innerText = `${this.countTasks()}`;
+    finishedTasksCounter.innerText = `${this.countFinished()}`;
+    unfinishedTasksCounter.innerText = `${this.countUnfinished()}`;
   }
 
   toggletaskFinished(i: number) {
     const data = this.gettasks();
 
     if (i <= data.length) {
-      if (data[i]!.finished) {
+      if (data[i]?.finished) {
         this.markUnfinished(i);
       } else {
         this.markFinished(i);
@@ -234,10 +246,10 @@ class TDM {
     const data = this.gettasks();
 
     if (i <= data.length) {
-      data[i]!.finished = false;
+      data[i].finished = false;
 
       ErrorManagement.toast({
-        text: `Marked task #${i+1} as unfinished.`,
+        text: `Marked task #${i + 1} as unfinished.`,
         title: "",
         delay: 3000,
       });
@@ -250,10 +262,10 @@ class TDM {
     const data = this.gettasks();
 
     if (i <= data.length) {
-      data[i]!.finished = true;
+      data[i].finished = true;
 
       ErrorManagement.toast({
-        text: `Marked task #${i+1} as finished.`,
+        text: `Marked task #${i + 1} as finished.`,
         title: "",
         delay: 3000,
       });
@@ -265,8 +277,8 @@ class TDM {
   completeAll() {
     const data = this.gettasks();
 
-    for (let i=0;i<data.length;i++) {
-      data[i]!.finished = true;
+    for (let i = 0; i < data.length; i++) {
+      data[i].finished = true;
     }
 
     ErrorManagement.toast({

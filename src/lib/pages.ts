@@ -61,7 +61,17 @@ export const pages = new Map<string, Page>([
       onSidebar: true,
       color: colors.green,
       hasCountableContent:true,
+      addBreak:true,
     },
+  ],
+  [
+    "themeselector",
+    {
+      dispName: "Themes",
+      materialIcon:"palette",
+      onSidebar:true,
+      color:colors.purple
+    }
   ],
   [
     "settings",

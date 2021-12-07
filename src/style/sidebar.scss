@@ -9,6 +9,7 @@ div.sidebar button.option * {
 }
 
 div.sidebar button.option {
+  position:relative;
   text-align: left;
   background-color: transparent;
   border: none;
@@ -46,12 +47,23 @@ div.sidebar button.page.option.fast-opacity-tran {
   transition: color 0.1s, background 0.3s, opacity 0.1s;
 }
 
+div.sidebar button.page.option span.counter {
+  position:absolute;
+  right:0;
+  top:7px;
+  right:10px;
+}
+
 div.sidebar button.option span {
   transition: color 0.1s, opacity 0.3s, visibility 0.3s;
 }
 
 body.sidebar-collapsed * {
-  --sidebar-width: 90px;
+  --sidebar-width: 85px;
+}
+
+body.sidebar-collapsed div.sidebar {
+  padding:var(--sidebar-padding) 0.7rem !important;
 }
 
 body.sidebar-collapsed div.sidebar button > span:not(span.material-icons) {

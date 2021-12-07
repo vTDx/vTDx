@@ -28,16 +28,16 @@ export const actions = new Map<string, Action>([
           )
         ) {
           ErrorManagement.toast({
-            title:"",
-            text:"Cleared all notes",
-            delay:3000
+            title: "",
+            text: "Cleared all notes",
+            delay: 3000,
           });
           localStorage.removeItem("notestore");
           NoteManagement.refreshAll();
         }
       },
       color: colors.red,
-      addBreak:true
+      addBreak: true,
     },
   ],
   [
@@ -49,7 +49,6 @@ export const actions = new Map<string, Action>([
         NewNoteDialog.show(dialogTypes.task, true);
       },
       color: colors.purple,
-      
     },
   ],
   [
@@ -64,20 +63,19 @@ export const actions = new Map<string, Action>([
           )
         ) {
           ErrorManagement.toast({
-            title:"",
-            text:"Cleared all tasks",
-            delay:3000
+            title: "",
+            text: "Cleared all tasks",
+            delay: 3000,
           });
           localStorage.removeItem("taskstore");
           taskManagement.refreshAll();
         }
       },
       color: colors.red,
-      
     },
   ],
   [
-  "finishalltasks",
+    "finishalltasks",
     {
       dispName: "Complete All Tasks",
       materialIcon: "done_all",

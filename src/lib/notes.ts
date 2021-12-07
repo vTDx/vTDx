@@ -16,28 +16,18 @@ class NM {
   }
 
   countUnpinned(): number {
-    let pinned = this.countPinned();
+    const pinned = this.countPinned();
 
-    const data = this.getNotes();
-
-    return data.length - pinned;
+    return this.getNotes().length - pinned;
   }
 
 
   countNotes():number {
-    let notes = 0;
-
-    const data = this.getNotes();
-
-    for (let i = 0; i < data.length; i++) {
-      notes++;
-    }
-
-    return notes;
+    return this.getNotes().length;
   }
 
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-allnotes")!;
+    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
 
     if (clear) target.innerHTML = "";
 
@@ -62,7 +52,7 @@ class NM {
   }
 
   populatePinnedNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-pinned")!;
+    if (!target) target = document.getElementById("page-pinned") || document.createElement("div");
 
     if (clear) target.innerHTML = "";
 
@@ -86,7 +76,7 @@ class NM {
         buttonAction: () => {
           PageManagement.switch(
             "allnotes",
-            document.getElementById("button-page-allnotes")!
+            document.getElementById("button-page-allnotes") || document.createElement("div")
           );
         },
       };
@@ -98,10 +88,16 @@ class NM {
     this.populateAllNotes(true);
     this.populatePinnedNotes(true);
     console.log(`Pinned: ${this.countPinned()} | Unpinned: ${this.countUnpinned()} | Notes: ${this.countNotes()}`);
+
+    const allNotesCounter = (document.querySelector("button#button-page-allnotes span.counter") || document.createElement("div")) as HTMLSpanElement;
+    const PinNotesCounter = (document.querySelector("button#button-page-pinned span.counter") || document.createElement("div")) as HTMLSpanElement;
+
+    allNotesCounter.innerText = `${this.countNotes()}`;
+    PinNotesCounter.innerText = `${this.countPinned()}`;
   }
 
   createNote(title: string, content: string) {
-    let json: Note[] = this.getNotes();
+    const json: Note[] = this.getNotes();
 
     const newNote: Note = {
       title,
@@ -115,7 +111,7 @@ class NM {
   }
 
   deleteNote(i: number) {
-    let notes = this.getNotes();
+    const notes = this.getNotes();
 
     if (i <= notes.length) {
       notes.splice(i, 1);
@@ -125,7 +121,7 @@ class NM {
   }
 
   pinNote(i: number) {
-    let notes = this.getNotes();
+    const notes = this.getNotes();
 
     if (i <= notes.length) {
       notes[i].pinned = true;
@@ -135,7 +131,7 @@ class NM {
   }
 
   unPinNote(i: number) {
-    let notes = this.getNotes();
+    const notes = this.getNotes();
 
     if (i <= notes.length) {
       notes[i].pinned = false;
@@ -145,7 +141,7 @@ class NM {
   }
 
   togglePinnedNote(i: number) {
-    let notes = this.getNotes();
+    const notes = this.getNotes();
 
     if (i <= notes.length) {
       if (notes[i].pinned) {
@@ -159,13 +155,13 @@ class NM {
   }
 
   getNotes() {
-    let notes = JSON.parse(localStorage.getItem("notestore")!) || [];
+    const notes = JSON.parse(localStorage.getItem("notestore")!) || [];
 
     return notes;
   }
 
   displayNote(i: number, target: HTMLElement) {
-    if (!target) target = document.getElementById("page-allnotes")!;
+    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
     const notes = this.getNotes();
 
     const note = document.createElement("div");
