@@ -6,6 +6,7 @@ import { actions } from "./actions";
 class SBUI {
   populatePages() {
     const sidebar = document.querySelector("div.sidebar>div#pages");
+    const topbar = document.querySelector("div.headerbar>div#pages")!;
 
     for (const page of pages) {
       if (page[1].onSidebar) {
@@ -36,11 +37,22 @@ class SBUI {
           text.style.color = ``;
         });
 
-        sidebar?.append(button);
-        if (page[1].addBreak) {
-          sidebar?.append(document.createElement("hr"));
-        }
+        if (!page[1].inTopBar) {
+          text.style.display = "none";
 
+          sidebar?.append(button);
+          
+          if (page[1].addBreak) {
+            sidebar?.append(document.createElement("hr"));
+          }
+        } else {
+
+          topbar?.append(button);
+          if (page[1].addBreak) {
+            topbar?.append(document.createElement("hr"));
+          }
+        }
+        
         if (page[1].hasCountableContent) {
           const numberSpan = document.createElement("span");
           numberSpan.className = "counter";

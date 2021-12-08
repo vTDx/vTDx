@@ -78,16 +78,8 @@ export const pages = new Map<string, Page>([
       onSidebar:true,
       color:colors.purple,
       onHome:true,
+      inTopBar:true
     }
-  ],
-  [
-    "settings",
-    {
-      dispName: "Settings",
-      materialIcon: "settings",
-      onSidebar: false,
-      color: colors.gray,
-    },
   ],
   [
     "error",

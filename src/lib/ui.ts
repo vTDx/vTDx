@@ -31,6 +31,7 @@ export interface Page {
   addBreak?:boolean;
   hasCountableContent?:boolean;
   onHome?:boolean;
+  inTopBar?:boolean;
 }
 
 export interface Action {
@@ -40,6 +41,7 @@ export interface Action {
   action: () => void;
   color: colors;
   addBreak?:boolean;
+  inTopBar?:boolean;
 }
 
 export const UserInterface = new UI();
