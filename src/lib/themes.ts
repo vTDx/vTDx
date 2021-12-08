@@ -1,6 +1,6 @@
 import { ErrorManagement, ToastData } from "./error";
 import { ThemeSelectorUI } from "./pages/themeselector";
-import { themeStore } from "./themestore";
+import { colorSchemes, themeStore } from "./themestore";
 
 class TM {
   applyTheme(theme: string, setLS: boolean) {
@@ -21,6 +21,10 @@ class TM {
 
       for (const color in colorData) {
         innerRule += `--${color}: ${colorData[color]}; `;
+      }
+
+      if (themeStore.get(theme)?.scheme == colorSchemes.lightmode) {
+        innerRule += `--topbar-bg: #0001; --sidebar-bg: #00000004; --input-bg: #00000006`;
       }
 
       let rule = `body { ${innerRule.trimEnd()} }`;
@@ -69,6 +73,7 @@ export interface Theme {
   colors: ThemeColors;
   userSelectable: boolean;
   default?: boolean;
+  scheme: colorSchemes;
 }
 
 export interface ThemeColors {

@@ -2,7 +2,7 @@ input,
 textarea {
   border: none;
   border-radius: 0.4em;
-  background-color: #ffffff06;
+  background-color: var(--input-bg);
   color: var(--fg);
   padding: 10px;
   transition: background 0.3s, opacity 0.3s, border-bottom 0.2s;

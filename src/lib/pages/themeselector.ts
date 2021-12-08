@@ -1,16 +1,23 @@
 import { ThemeManagement } from "../themes";
-import { themeStore } from "../themestore";
+import { colorSchemes, themeStore } from "../themestore";
 
 class TSUI {
   refreshAll(clear?: boolean) {
     const themes = ThemeManagement.getThemes();
-    const target = document.getElementById("page-themeselector")!;
+    const darkmodeTarget = document.querySelectorAll(
+      "div#page-themeselector #darkmode"
+    )![0];
+    const lightmodeTarget = document.querySelectorAll(
+      "div#page-themeselector #lightmode"
+    )![0];
 
     if (clear) {
-      document.getElementById("page-themeselector")!.innerHTML = "";
+      darkmodeTarget.innerHTML = "";
+      lightmodeTarget.innerHTML = "";
     }
 
-    let counter = 0;
+    let darkmodeCounter = 0;
+    let lightmodeCounter = 0;
 
     for (let i = 0; i < themes.length; i++) {
       const div = document.createElement("div");
@@ -22,8 +29,6 @@ class TSUI {
       const colorPreviewDiv = document.createElement("div");
       const appliedCheckmark = document.createElement("span");
 
-      if(themes[i][1].userSelectable == true) counter++;
-
       if (
         localStorage.getItem("theme") &&
         localStorage.getItem("theme") == themes[i][0]
@@ -34,12 +39,13 @@ class TSUI {
       }
 
       applyButton.className = "apply";
-      applyButton.innerText = localStorage.getItem("theme") == themes[i][0]?`Applied`:`Apply`;
+      applyButton.innerText =
+        localStorage.getItem("theme") == themes[i][0] ? `Applied` : `Apply`;
       applyButton.addEventListener("click", () => {
         ThemeManagement.applyTheme(themes[i][0], true);
       });
       if (localStorage.getItem("theme") == themes[i][0]) {
-          applyButton.setAttribute("disabled","true");
+        applyButton.setAttribute("disabled", "true");
       }
 
       colorPreviewDiv.className = "color-preview";
@@ -66,10 +72,20 @@ class TSUI {
       div.append(title, author, applyButton, colorPreviewDiv);
 
       if (themes[i][1].userSelectable == true) {
-        target.append(div);
-        if (counter == 3) {
-            counter = 0;
-            target.append(document.createElement("br"));
+        if (colorSchemes[themes[i][1]!.scheme] == "darkmode") {
+          darkmodeCounter++;
+          darkmodeTarget.append(div);
+          if (darkmodeCounter == 3) {
+            darkmodeCounter = 0;
+            darkmodeTarget.append(document.createElement("br"));
+          }
+        } else if (colorSchemes[themes[i][1]!.scheme] == "lightmode") {
+          lightmodeCounter++;
+          lightmodeTarget.append(div);
+          if (lightmodeCounter == 3) {
+            lightmodeCounter = 0;
+            lightmodeTarget.append(document.createElement("br"));
+          }
         }
       }
     }
