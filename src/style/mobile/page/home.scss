@@ -2,5 +2,47 @@
     div#page-home button {
         margin-left: 0 !important;
         margin-bottom:5px;
+        width:100% !important;
+        height:unset;
+        text-align: left;
+    }
+
+    div#page-home div.centered-absolute {
+        width:var(--content-width);
+        height:calc(100vh - var(--topbar-height));
+        text-align: left;
+        transform:unset;
+        -o-transform:unset;
+        -ms-transform:unset;
+        -moz-transform:unset;
+        -webkit-transform:unset;
+        position:relative;
+        left:0;
+        padding-left:unset;
+    }
+
+    div#page-home span.material-icons {
+        font-size:20px;
+        display:inline-block;
+        vertical-align: -webkit-baseline-middle;
+        margin-right:5px;
+    }
+
+    div#page-home * {
+        display: inline-block;
+    }
+
+    div#page-home .bold.big.nomargin,
+    div#page-home div.centered-absolute>p {
+        text-align: center;
+        display:block;
+    }
+
+    div#page-home p.margin-bottom-20px {
+        margin-bottom:-5px;
+    }
+
+    div#page-home .bold.big.nomargin {
+        margin-top:5px;
     }
 }

@@ -3,6 +3,11 @@
     --sidebar-width: 90px;
   }
 
+  div.sidebar {
+    padding-left:8px !important;
+    padding-right: 8px !important;
+  }
+
   div.sidebar button > span:not(span.material-icons) {
     visibility: hidden;
     opacity: 0;

@@ -1,0 +1,12 @@
+@media screen and (max-width:600px) {
+    div.content#target {
+        position: fixed;
+        top: var(--topbar-height);
+        left: calc(var(--sidebar-width) - calc(var(--sidebar-padding) * 1) - 3px);
+        width: calc(100% - calc(var(--sidebar-width)) + 15px);
+        height: calc(100vh - 35px - calc(var(--content-padding) * 2));
+        padding: calc(var(--sidebar-padding) / 3);
+        overflow-y: scroll;
+        transition:width 0.3s, left 0.3s;
+    }
+}

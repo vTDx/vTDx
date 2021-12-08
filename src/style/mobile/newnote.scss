@@ -23,13 +23,12 @@
     div#create-note-dialog textarea {
         resize: none;
         min-width:unset;
-        height: calc(100% - 225px);
+        height: calc(100% - calc(var(--topbar-height) * 3.3));
         margin-bottom:10px;
     }
 
     div#create-note-dialog .bottomright {
-        position:unset !important;
-        display:block;
-        right:unset;
+        position:absolute;
+        top:30px;
     }
 }
