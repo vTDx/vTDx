@@ -12,7 +12,7 @@ import { ThemeManagement } from './lib/themes';
 import { ThemeSelectorUI } from './lib/pages/themeselector';
 
 // Add color classes from `colors` enum
-UserInterface.addColorClasses();
+UserInterface.registerColorClasses();
 
 const startPage = "home";
 

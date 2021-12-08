@@ -1,11 +1,16 @@
+import { ThemeManagement } from "./themes";
+
 class UI {
-  addColorClasses() {
+  registerColorClasses() {
     for (let color in colors) {
       const colorString = colors[color];
-      const rule = `.${colorString} { color: var(--${colorString}); }`;
+      const rule = `body .${colorString} { color: var(--${colorString}); }`;
 
       try {
-        document.styleSheets[0].insertRule(rule, 0);
+        ThemeManagement.getBottomStyleSheet().insertRule(
+          rule,
+          ThemeManagement.getBottomStyleSheet().cssRules.length
+        );
       } catch {}
     }
   }
@@ -28,10 +33,10 @@ export interface Page {
   onSidebar: boolean;
   color: colors;
   default?: boolean;
-  addBreak?:boolean;
-  hasCountableContent?:boolean;
-  onHome?:boolean;
-  inTopBar?:boolean;
+  addBreak?: boolean;
+  hasCountableContent?: boolean;
+  onHome?: boolean;
+  inTopBar?: boolean;
 }
 
 export interface Action {
@@ -40,8 +45,8 @@ export interface Action {
   page?: string;
   action: () => void;
   color: colors;
-  addBreak?:boolean;
-  inTopBar?:boolean;
+  addBreak?: boolean;
+  inTopBar?: boolean;
 }
 
 export const UserInterface = new UI();

@@ -5,7 +5,7 @@ import { Error, ErrorManagement } from "./error";
 class PM {
   switch(page: string, button?: HTMLElement) {
     const pgHTML = document.getElementById(`page-${page}`);
-    const buttons = document.querySelectorAll("div.sidebar>#pages>button");
+    const buttons = document.querySelectorAll("#pages>button");
 
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].className = "option page";

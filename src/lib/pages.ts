@@ -11,6 +11,7 @@ export const pages = new Map<string, Page>([
       default: true,
       addBreak:true,
       onHome:false,
+      inTopBar:true
     },
   ],
   [

@@ -6,11 +6,17 @@ div.headerbar h1.header {
 div.headerbar div.page-display {
   position: absolute;
   top: 6px;
-  right: 30px;
+  right: 20px;
+  display: inline-block;
+}
+
+div.headerbar div.page-display h3 {
+  display: inline-block;
+  margin-right: 10px;
 }
 
 div.headerbar div.page-display * {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 div.headerbar #page-dot {
@@ -19,26 +25,82 @@ div.headerbar #page-dot {
 }
 
 div.headerbar button.action {
-    padding:0;
-    margin:0;
-    margin-right:20px;
-    background: transparent;
-    transition:color 0.3s, opacity 0.3s;
-    border-bottom:none;
-
+  padding: 0;
+  margin: 0;
+  margin-right: 20px;
+  background: transparent;
+  transition: color 0.3s, opacity 0.3s;
+  border-bottom: none;
+  display: inline-block;
 }
 
 div.headerbar button.action:hover {
-    color: var(--purple);
-    border-bottom:none;
-    background-color: transparent;
+  color: var(--purple);
+  border-bottom: none;
+  background-color: transparent;
 }
 
 div.headerbar button.action:active {
-    opacity: 0.6;
-    border-bottom:none;
+  opacity: 0.6;
+  border-bottom: none;
 }
 
 div.headerbar button.action span.material-icons {
-    font-size:18px;
+  font-size: 18px;
+}
+
+div.headerbar button.option span.material-icons {
+  font-size: 24px;
+}
+
+div.headerbar button.option * {
+  vertical-align: middle;
+  transition: color 0.1s;
+}
+
+div.headerbar button.option {
+  position: relative;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  color: var(--fg);
+  font-size: 16px;
+  width: calc(var(--headerbar-width) - calc(var(--headerbar-padding) * 2));
+  transition: color 0.3s, background 0.3s, opacity 0.3s;
+  padding: 5px;
+  border-radius: 0.25em;
+  padding-right: -10px;
+}
+
+div.headerbar button.option:hover {
+  //color: var(--blue);
+  background: #ffffff06;
+  opacity: 0.7 !important;
+}
+
+div.headerbar button.option:active {
+  background: #0002;
+}
+
+div.headerbar button.page.option.unselected {
+  opacity: 0.3;
+}
+
+div.headerbar button.page.option.selected {
+  opacity: 1;
+}
+
+div.headerbar button.page.option.fast-opacity-tran {
+  transition: color 0.1s, background 0.3s, opacity 0.1s;
+}
+
+div.headerbar button.page.option span.counter {
+  position: absolute;
+  right: 0;
+  top: 7px;
+  right: 10px;
+}
+
+div.headerbar button.option span {
+  transition: color 0.1s, opacity 0.3s, visibility 0.3s;
 }

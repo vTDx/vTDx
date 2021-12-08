@@ -5,12 +5,16 @@ import { colorSchemes, themeStore } from "./themestore";
 class TM {
   applyTheme(theme: string, setLS: boolean) {
     console.log(`ThemeManagement: applying ${theme}`);
+      
+
     if (themeStore.has(theme)) {
-      const styleSheets = document.styleSheets[0];
+      const ruleIdentifier = "body *, body { ";
+
+      const styleSheets = this.getBottomStyleSheet();
 
       for (let i = 0; i < styleSheets.cssRules.length; i++) {
-        if (styleSheets.cssRules[i].cssText.startsWith("body { --")) {
-          document.styleSheets[0].deleteRule(i);
+        if (styleSheets.cssRules[i].cssText.startsWith(ruleIdentifier + "--")) {
+          this.getBottomStyleSheet().deleteRule(i);
         }
       }
 
@@ -27,8 +31,8 @@ class TM {
         innerRule += `--topbar-bg: #0001; --sidebar-bg: #00000004; --input-bg: #00000006`;
       }
 
-      let rule = `body { ${innerRule.trimEnd()} }`;
-      document.styleSheets[0].insertRule(rule, 0);
+      let rule = `${ruleIdentifier}${innerRule.trimEnd()} }`;
+      this.getBottomStyleSheet().insertRule(rule, 0);
 
       if (setLS) localStorage.setItem("theme", theme);
 
@@ -57,9 +61,15 @@ class TM {
   }
 
   init() {
+    document.body.append(document.createElement("style"));
+
     let savedTheme = localStorage.getItem("theme")!;
 
     this.applyTheme(savedTheme, false);
+  }
+
+  getBottomStyleSheet() {
+    return document.styleSheets[document.styleSheets.length - 1];
   }
 
   loadedTheme = "";
