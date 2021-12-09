@@ -91,4 +91,13 @@ export const pages = new Map<string, Page>([
       color: colors.red,
     },
   ],
+  [
+    "trash",
+    {
+      dispName:"Trash",
+      materialIcon:"delete",
+      onSidebar:true,
+      color:colors.red
+    }
+  ]
 ]);

@@ -2,6 +2,7 @@ import { Error, ErrorManagement } from "./error";
 import { MarkDown } from "./markdown";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { PageManagement } from "./page";
+import { TrashManagement } from "./trash";
 
 class TDM {
   countFinished(): number {
@@ -10,7 +11,7 @@ class TDM {
     const data = this.getTasks();
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i]?.finished) counter++;
+      if (data[i]?.finished && !data[i]?.deleted) counter++;
     }
 
     return counter;
@@ -19,11 +20,19 @@ class TDM {
   countUnfinished(): number {
     const counter = this.countFinished();
 
-    return this.getTasks().length - counter;
+    return this.countTasks() - counter;
   }
 
   countTasks(): number {
-    return this.getTasks().length;
+    let counter = 0;
+
+    const data = this.getTasks();
+
+    for (let i = 0; i < data.length; i++) {
+      if (!data[i]?.deleted) counter++;
+    }
+
+    return counter;
   }
 
   populateTaskPage(clear?: boolean, target?: HTMLElement) {
@@ -36,11 +45,16 @@ class TDM {
 
       const tasks = this.getTasks();
 
+      let taskCounter = 0;
+
       for (let i = 0; i < tasks.length; i++) {
-        this.displayTask(i, target);
+        if (!tasks[i]?.deleted) {
+          this.displayTask(i, target);
+          taskCounter++;
+        }
       }
 
-      if (!tasks.length) {
+      if (!taskCounter) {
         const messageData: Error = {
           materialIcon: "broken_image",
           message: "You have no tasks",
@@ -80,7 +94,7 @@ class TDM {
       let unfinishedTaskCount = 0;
 
       for (let i = 0; i < tasks.length; i++) {
-        if (!tasks[i].finished) {
+        if (!tasks[i].finished && !tasks[i]?.deleted) {
           this.displayTask(i, target);
           unfinishedTaskCount++;
         }
@@ -120,7 +134,7 @@ class TDM {
       let finishedTaskCount = 0;
 
       for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].finished) {
+        if (tasks[i].finished && !tasks[i]?.deleted) {
           this.displayTask(i, target);
           finishedTaskCount++;
         }
@@ -154,6 +168,7 @@ class TDM {
     const data: Task = {
       text,
       finished: false,
+      deleted:false
     };
 
     json.push(data);
@@ -243,16 +258,14 @@ class TDM {
     const json = this.getTasks();
 
     if (i <= json.length) {
-      json.splice(i, 1);
+      TrashManagement.moveTaskToTrash(i);
 
       ErrorManagement.toast({
-        text: `Task #${i + 1} deleted.`,
+        text: `Task #${i + 1} moved to trash.`,
         title: "",
         delay: 3000,
       });
     }
-
-    localStorage.setItem("taskstore", JSON.stringify(json));
   }
 
   refreshAll() {
@@ -353,6 +366,7 @@ class TDM {
         const Task: Task = {
           text,
           finished: json[i]?.finished,
+          deleted: json[i]?.deleted
         };
 
         json[i] = Task;
@@ -370,6 +384,7 @@ class TDM {
 interface Task {
   text: string;
   finished: boolean;
+  deleted:boolean;
 }
 
 export const TaskManagement = new TDM();

@@ -3,6 +3,7 @@ import { ErrorManagement } from "./error";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { NoteManagement } from "./notes";
 import { TaskManagement } from "./tasks";
+import { TrashManagement } from "./trash";
 import { colors, Action } from "./ui";
 
 export const actions = new Map<string, Action>([
@@ -118,6 +119,33 @@ export const actions = new Map<string, Action>([
         TaskManagement.completeAll();
       },
       color: colors.green,
+      addBreak: true,
+    },
+  ],
+  [
+    "emptytrash",
+    {
+      dispName: "Empty Trash",
+      materialIcon: "delete_sweep",
+      action: () => {
+        const data: ConfirmationBox = {
+          title: "Empty Trash",
+          message: "Are you sure you want to empty the trash?",
+          confirmButtonAction: () => {
+            ErrorManagement.toast({
+              title: "",
+              text: "Trash emptied",
+              delay: 3000,
+            });
+
+            TrashManagement.emptyTrash();
+          },
+          confirmButtonText: "Empty Trash",
+        };
+
+        Confirmation.display(data);
+      },
+      color: colors.red,
     },
   ],
 ]);

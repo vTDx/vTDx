@@ -10,7 +10,8 @@ div.task {
 div.task .header {
   margin: 0;
   max-width:calc(100% - var(--sidebar-width) - var(--content-padding) + 185px);
-  overflow-x: hidden;
+  line-height: 1.2;
+  overflow:hidden;
 }
 
 div.task .content {
@@ -49,7 +50,7 @@ div.task .header p {
 }
 
 div.task button.finish {
-  left: -25px;
+  left: 0px;
 }
 
 div.task button.finish:hover {
@@ -62,4 +63,16 @@ div.task button.edit {
 
 div.task button.edit:hover {
   color: var(--orange);
+}
+
+div.task .header {
+  padding-left:31px;
+}
+
+div#page-trash div.task {
+  opacity: 0.6;
+}
+
+div#page-trash div.task .header {
+  padding-left:0;
 }

@@ -84,3 +84,7 @@ div.note .content {
 div.note button.pin.unpin:hover {
   color: var(--red);
 }
+
+div#page-trash div.note {
+  opacity: 0.6;
+}

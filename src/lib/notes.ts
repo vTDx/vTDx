@@ -4,6 +4,7 @@ import { Error } from "./error";
 import { PageManagement } from "./page";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { MarkDown } from "./markdown";
+import { TrashManagement } from "./trash";
 class NM {
   countPinned(): number {
     let pinned = 0;
@@ -11,7 +12,9 @@ class NM {
     const data = this.getNotes();
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i]!.pinned) pinned++;
+      if (data[i]!.pinned && !data[i]!.deleted) {
+        pinned++;
+      }
     }
 
     return pinned;
@@ -22,7 +25,17 @@ class NM {
   }
 
   countNotes(): number {
-    return this.getNotes().length;
+    let pinned = 0;
+
+    const data = this.getNotes();
+
+    for (let i = 0; i < data.length; i++) {
+      if (!data[i]!.deleted) {
+        pinned++;
+      }
+    }
+
+    return pinned;
   }
 
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
@@ -35,11 +48,17 @@ class NM {
 
     const notes = this.getNotes();
 
+    let noteCounter = 0;
+
     for (let i = 0; i < notes.length; i++) {
-      this.displayNote(i, target);
+      if (!notes[i]?.deleted) {
+        this.displayNote(i, target);
+
+        noteCounter++;
+      }
     }
 
-    if (!notes.length) {
+    if (!noteCounter) {
       const messageData: Error = {
         materialIcon: "description",
         message: "You have no notes.",
@@ -76,7 +95,7 @@ class NM {
     let pinnedAmount = 0;
 
     for (let i = 0; i < notes.length; i++) {
-      if (notes[i].pinned) {
+      if (notes[i].pinned && notes[i].deleted) {
         this.displayNote(i, target);
         pinnedAmount++;
       }
@@ -123,6 +142,7 @@ class NM {
       title,
       content,
       pinned: false,
+      deleted: false,
     };
 
     json.push(newNote);
@@ -134,10 +154,8 @@ class NM {
     const notes = this.getNotes();
 
     if (i <= notes.length) {
-      notes.splice(i, 1);
+      TrashManagement.moveNoteToTrash(i);
     }
-
-    localStorage.setItem("notestore", JSON.stringify(notes));
   }
 
   pinNote(i: number) {
@@ -263,12 +281,13 @@ class NM {
           title,
           content,
           pinned: json[i]?.pinned,
+          deleted: json[i]?.deleted,
         };
 
         json[i] = note;
 
         localStorage.setItem("notestore", JSON.stringify(json));
-        
+
         NoteManagement.refreshAll();
       },
       clearFields: false,
@@ -282,6 +301,7 @@ export interface Note {
   title: string;
   content: string;
   pinned: boolean;
+  deleted: boolean;
 }
 
 export const NoteManagement = new NM();

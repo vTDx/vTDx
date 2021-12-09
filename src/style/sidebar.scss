@@ -61,6 +61,11 @@ body.sidebar-collapsed * {
   --sidebar-width: 85px;
 }
 
+body.sidebar-collapsed div.content {
+  left: calc(var(--sidebar-width) - var(--sidebar-padding));
+  width: calc(100% - var(--sidebar-width) - var(--content-padding));
+}
+
 body.sidebar-collapsed div.sidebar {
   padding:var(--sidebar-padding) 0.7rem !important;
 }

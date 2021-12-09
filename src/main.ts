@@ -15,6 +15,7 @@ import { ThemeSelectorUI } from "./lib/pages/themeselector";
 import javascript from 'highlight.js/lib/languages/typescript';
 import typescript from 'highlight.js/lib/languages/javascript';
 import { DOM } from './lib/dom';
+import { TrashManagement } from './lib/trash';
 
 hljs.registerLanguage('ts', typescript);
 hljs.registerLanguage('js', javascript);
@@ -32,6 +33,7 @@ SideBarUI.init();
 ErrorManagement.init();
 ThemeManagement.init();
 DOM.init();
+TrashManagement.init();
 
 // Sidebar
 SideBarUI.populateActions();
@@ -50,3 +52,11 @@ PageManagement.switch(
 
 // Populate home screen buttons
 HomePageUserInterface.populateHomeButtons();
+/* 
+for (let i=0;i<10;i++) {
+  NoteManagement.createNote(`${Math.floor(Math.random() * 10000)}`,`${Math.floor(Math.random() * 10000)}`)
+}
+
+for (let i=0;i<10;i++) {
+  TaskManagement.createTask(`${Math.floor(Math.random() * 10000)}`)
+} */

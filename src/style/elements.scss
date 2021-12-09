@@ -30,7 +30,7 @@ div.sidebar * {
 div.content {
   position: fixed;
   top: var(--topbar-height);
-  left: var(--sidebar-width);
+  left: calc(var(--sidebar-width));
   width: calc(100% - var(--sidebar-width) - calc(var(--content-padding) * 2));
   height: calc(100vh - 70px - calc(var(--content-padding) * 2));
   padding: var(--sidebar-padding);
