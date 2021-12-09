@@ -272,6 +272,14 @@ class TM {
 
     this.populateTrashPage();
   }
+
+  countDeletedNotes() {
+
+  }
+
+  countDeletedTasks() {
+    
+  }
 }
 
 export const TrashManagement = new TM();
