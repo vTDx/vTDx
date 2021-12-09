@@ -1,12 +1,13 @@
 import { Error, ErrorManagement } from "./error";
-import { dialogTypes, NewNoteDialog } from "./newnotedialog";
+import { MarkDown } from "./markdown";
+import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { PageManagement } from "./page";
 
 class TDM {
   countFinished(): number {
     let counter = 0;
 
-    const data = this.gettasks();
+    const data = this.getTasks();
 
     for (let i = 0; i < data.length; i++) {
       if (data[i]?.finished) counter++;
@@ -18,33 +19,47 @@ class TDM {
   countUnfinished(): number {
     const counter = this.countFinished();
 
-    return this.gettasks().length - counter;
+    return this.getTasks().length - counter;
   }
 
   countTasks(): number {
-    return this.gettasks().length;
+    return this.getTasks().length;
   }
 
-  populatetaskPage(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-task") || document.createElement("div");
+  populateTaskPage(clear?: boolean, target?: HTMLElement) {
+    if (!target)
+      target =
+        document.getElementById("page-task") || document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.gettasks();
+      const tasks = this.getTasks();
 
       for (let i = 0; i < tasks.length; i++) {
-        this.displaytask(i, target);
+        this.displayTask(i, target);
       }
 
       if (!tasks.length) {
         const messageData: Error = {
-          materialIcon: "task",
-          message: "You have no tasks.",
+          materialIcon: "broken_image",
+          message: "You have no tasks",
           id: "page-task",
           buttonCaption: "Create a task",
           buttonAction: () => {
-            NewNoteDialog.show(dialogTypes.task, true);
+            const data: NewNoteDialogData = {
+              windowTitle: "Create new Task",
+              nodeTitle: "Content",
+              hideTitleField: false,
+              hideContentField: true,
+              buttonText: "Create task",
+              buttonAction: (title: string) => {
+                this.createTask(title);
+                this.refreshAll();
+              },
+              clearFields: true,
+            };
+            NewNoteDialog.show(data);
           },
         };
         ErrorManagement.newError(messageData);
@@ -53,31 +68,37 @@ class TDM {
   }
 
   populateUnFinishedTasksPage(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-unftasks") || document.createElement("div");
+    if (!target)
+      target =
+        document.getElementById("page-unftasks") ||
+        document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.gettasks();
+      const tasks = this.getTasks();
       let unfinishedTaskCount = 0;
 
       for (let i = 0; i < tasks.length; i++) {
         if (!tasks[i].finished) {
-          this.displaytask(i, target);
+          this.displayTask(i, target);
           unfinishedTaskCount++;
         }
       }
 
       if (!unfinishedTaskCount) {
         const messageData: Error = {
-          materialIcon: "task",
-          message: "All your tasks are finished!",
+          materialIcon: tasks.length ? "check" : "broken_image",
+          message: tasks.length
+            ? "All your tasks are finished!"
+            : "You don't have any tasks!",
           id: "page-unftasks",
           buttonCaption: "Goto your tasks",
           buttonAction: () => {
             PageManagement.switch(
               "task",
-              document.getElementById("button-page-task") || document.createElement("div")
+              document.getElementById("button-page-task") ||
+                document.createElement("div")
             );
           },
         };
@@ -87,43 +108,50 @@ class TDM {
   }
 
   populateFinishedTasksPage(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-fintasks") || document.createElement("div");
+    if (!target)
+      target =
+        document.getElementById("page-fintasks") ||
+        document.createElement("div");
 
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.gettasks();
+      const tasks = this.getTasks();
       let finishedTaskCount = 0;
 
       for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].finished) {
-          this.displaytask(i, target);
+          this.displayTask(i, target);
           finishedTaskCount++;
         }
       }
 
       if (!finishedTaskCount) {
         const messageData: Error = {
-          materialIcon: "warning",
-          message: "You haven't completed any of your tasks!",
+          materialIcon: tasks.length ? "error_outline" : "broken_image",
+          message: tasks.length
+            ? "You haven't completed any of your tasks!"
+            : "You don't have any tasks!",
           id: "page-fintasks",
           buttonCaption: "Goto your tasks",
           buttonAction: () => {
             PageManagement.switch(
-             "task",
-              document.getElementById("button-page-task") || document.createElement("div")
+              "task",
+              document.getElementById("button-page-task") ||
+                document.createElement("div")
             );
           },
         };
+
         ErrorManagement.newError(messageData);
       }
     }
   }
 
-  createtask(text: string) {
-    const json: task[] = this.gettasks();
+  createTask(text: string) {
+    const json: Task[] = this.getTasks();
 
-    const data: task = {
+    const data: Task = {
       text,
       finished: false,
     };
@@ -133,25 +161,29 @@ class TDM {
     localStorage.setItem("taskstore", JSON.stringify(json));
   }
 
-  displaytask(i: number, target: HTMLElement) {
-    const tasks = this.gettasks();
+  displayTask(i: number, target: HTMLElement) {
+    const tasks = this.getTasks();
+    
     if (i <= tasks.length) {
-      if (!target) target = document.getElementById("page-task") || document.createElement("div");
+      if (!target)
+        target =
+          document.getElementById("page-task") || document.createElement("div");
 
       const task = document.createElement("div");
       const header = document.createElement("p");
-      const headerText = document.createTextNode(tasks[i]?.text);
       const deleteButton = document.createElement("button");
       const deleteButtonIcon = document.createElement("span");
       const finishedButton = document.createElement("button");
       const finishedButtonIcon = document.createElement("span");
+      const editButton = document.createElement("button");
+      const editButtonIcon = document.createElement("span");
 
       header.className = "header";
 
       deleteButton.className = "delete";
       deleteButton.title = "Delete task";
       deleteButton.addEventListener("click", () => {
-        this.deletetask(i);
+        this.deleteTask(i);
         this.refreshAll();
       });
 
@@ -165,6 +197,18 @@ class TDM {
         this.refreshAll();
       });
 
+      header.addEventListener("click", () => {
+        this.toggletaskFinished(i);
+        this.refreshAll();
+      });
+
+      editButton.className = "edit";
+      editButton.title = "Edit task";
+      editButton.addEventListener("click", () => {
+        this.editTask(i);
+        this.refreshAll();
+      });
+
       finishedButtonIcon.className = "material-icons";
       finishedButtonIcon.innerText = `${
         tasks[i].finished ? "check_box" : "check_box_outline_blank"
@@ -173,25 +217,30 @@ class TDM {
       deleteButtonIcon.className = "material-icons";
       deleteButtonIcon.innerText = "delete";
 
-      header.append(headerText);
+      editButtonIcon.className = "material-icons";
+      editButtonIcon.innerText = "edit";
+
+      header.innerHTML = MarkDown.toHTML(tasks[i]?.text);
+
       deleteButton.append(deleteButtonIcon);
       finishedButton.append(finishedButtonIcon);
+      editButton.append(editButtonIcon);
 
       task.className = "task";
-      task.append(header, finishedButton, deleteButton);
+      task.append(header, finishedButton, deleteButton, editButton);
 
       target.append(task);
     }
   }
 
-  gettasks() {
+  getTasks() {
     const tasks = JSON.parse(localStorage.getItem("taskstore")!) || [];
 
     return tasks;
   }
 
-  deletetask(i: number) {
-    const json = this.gettasks();
+  deleteTask(i: number) {
+    const json = this.getTasks();
 
     if (i <= json.length) {
       json.splice(i, 1);
@@ -207,20 +256,18 @@ class TDM {
   }
 
   refreshAll() {
-    this.populatetaskPage(true);
+    this.populateTaskPage(true);
     this.populateUnFinishedTasksPage(true);
     this.populateFinishedTasksPage(true);
-
-    console.log(
-      `Finished: ${this.countFinished()} | Unfinished: ${this.countUnfinished()} | Tasks: ${this.countTasks()}`
-    );
 
     const tasksCounter = (document.querySelector(
       "button#button-page-task span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
+    
     const finishedTasksCounter = (document.querySelector(
       "button#button-page-fintasks span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
+
     const unfinishedTasksCounter = (document.querySelector(
       "button#button-page-unftasks span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
@@ -231,7 +278,7 @@ class TDM {
   }
 
   toggletaskFinished(i: number) {
-    const data = this.gettasks();
+    const data = this.getTasks();
 
     if (i <= data.length) {
       if (data[i]?.finished) {
@@ -243,7 +290,7 @@ class TDM {
   }
 
   markUnfinished(i: number) {
-    const data = this.gettasks();
+    const data = this.getTasks();
 
     if (i <= data.length) {
       data[i].finished = false;
@@ -259,7 +306,7 @@ class TDM {
   }
 
   markFinished(i: number) {
-    const data = this.gettasks();
+    const data = this.getTasks();
 
     if (i <= data.length) {
       data[i].finished = true;
@@ -275,7 +322,7 @@ class TDM {
   }
 
   completeAll() {
-    const data = this.gettasks();
+    const data = this.getTasks();
 
     for (let i = 0; i < data.length; i++) {
       data[i].finished = true;
@@ -291,11 +338,38 @@ class TDM {
 
     this.refreshAll();
   }
+
+  editTask(i: number) {
+    const json: Task[] = this.getTasks();
+
+    const data: NewNoteDialogData = {
+      windowTitle: "Edit Task",
+      nodeTitle: "Content",
+      hideTitleField: false,
+      hideContentField: true,
+      buttonText: "edit Task",
+      titleFieldText: json[i]?.text,
+      buttonAction: (text: string) => {
+        const Task: Task = {
+          text,
+          finished: json[i]?.finished,
+        };
+
+        json[i] = Task;
+
+        localStorage.setItem("taskstore", JSON.stringify(json));
+        TaskManagement.refreshAll();
+      },
+      clearFields: false,
+    };
+
+    NewNoteDialog.show(data);
+  }
 }
 
-interface task {
+interface Task {
   text: string;
   finished: boolean;
 }
 
-export const taskManagement = new TDM();
+export const TaskManagement = new TDM();

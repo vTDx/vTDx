@@ -4,9 +4,6 @@ import { colorSchemes, themeStore } from "./themestore";
 
 class TM {
   applyTheme(theme: string, setLS: boolean) {
-    console.log(`ThemeManagement: applying ${theme}`);
-      
-
     if (themeStore.has(theme)) {
       const ruleIdentifier = "body *, body { ";
 

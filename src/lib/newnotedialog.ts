@@ -1,20 +1,16 @@
 import { ErrorManagement } from "./error";
 import { NoteManagement } from "./notes";
-import { taskManagement } from "./tasks";
+import { TaskManagement } from "./tasks";
 
 class NND {
   init() {
     const dialog = document.createElement("div");
     const shade = document.createElement("div");
-
     const header = document.createElement("h3");
-
     const textTitle = document.createElement("p");
     const textContent = document.createElement("p");
-
     const titleInput = document.createElement("input");
     const contentInput = document.createElement("textarea");
-
     const controls = document.createElement("span");
     const createButton = document.createElement("button");
     const cancelButton = document.createElement("button");
@@ -66,54 +62,75 @@ class NND {
     this.initDone = true;
   }
 
-  show(type: dialogTypes, clearFields?: boolean) {
+  show(data: NewNoteDialogData) {
     if (this.initDone) {
-      const titleInput = (document.querySelector(
+      const titleInput = document.querySelector(
         "div#create-note-dialog input"
-      ) as HTMLInputElement);
-      const contentInput = (document.querySelector(
+      ) as HTMLInputElement;
+
+      const contentInput = document.querySelector(
         "div#create-note-dialog textarea"
-      ) as HTMLTextAreaElement);
+      ) as HTMLTextAreaElement;
+
       const shade = document.getElementById("create-note-dialog-shade");
       const dialog = document.getElementById("create-note-dialog");
+      
       const header = document.querySelector(
         "div#create-note-dialog h3"
       ) as HTMLElement;
+      
       const createButton = document.querySelector(
         "div#create-note-dialog button#create-button"
       ) as HTMLButtonElement;
+      
       const paraphs = document.querySelectorAll(
         "div#create-note-dialog p.nomargin"
       );
 
-      const typeName = typeNames.get(dialogTypes[type]);
-
-      if (clearFields) {
+      if (data.clearFields) {
         titleInput.value = "";
         contentInput.value = "";
+      } else {
+        titleInput.value = data.titleFieldText || "";
+        contentInput.value = data.contentFieldText || "";
       }
 
-      header.innerText = `Create New ${typeName}`;
+      header.innerText = data.windowTitle;
 
-      createButton.innerText = `Create ${typeName}`;
+      createButton.innerText = data.buttonText;
 
       shade!.classList.remove("hidden");
       dialog!.classList.remove("hidden");
 
-      console.log(dialogTypes[type]);
-      if (dialogTypes[type] == "task") {
-        contentInput.style.display = "none";
-        (paraphs[1] as HTMLParagraphElement).style.display = "none";
-        titleInput.style.marginBottom = "50px";
-        createButton.addEventListener("click", this.processtask);
-        (paraphs[0] as HTMLParagraphElement).innerText = "Content";
-      } else {
-        contentInput.style.display = "";
-        (paraphs[1] as HTMLParagraphElement).style.display = "";
-        titleInput.style.marginBottom = "";
-        createButton.addEventListener("click", this.processNote);
-        (paraphs[0] as HTMLParagraphElement).innerText = "Title";
+      contentInput.style.display = data.hideContentField ? "none" : "";
+
+      titleInput.style.display = data.hideTitleField ? "none" : "";
+
+      (paraphs[1] as HTMLParagraphElement).style.display = data.hideContentField
+        ? "none"
+        : "";
+
+      titleInput.style.marginBottom = data.hideContentField ? "50px" : "";
+
+      createButton.addEventListener("click", x);
+
+      function x() {
+        createButton.removeEventListener("click", x);
+
+        const title =
+          (document.getElementById("title-inp") as HTMLInputElement).value ||
+          "";
+
+        const cntnt =
+          (document.getElementById("content-inp") as HTMLTextAreaElement)
+            .value || "";
+
+        data.buttonAction(title, cntnt);
+
+        NewNoteDialog.hide();
       }
+
+      (paraphs[0] as HTMLParagraphElement).innerText = data.nodeTitle;
     }
   }
 
@@ -126,16 +143,19 @@ class NND {
   }
 
   processNote() {
-    const titleInput = (document.querySelector(
+    const titleInput = document.querySelector(
       "div#create-note-dialog input"
-    ) as HTMLInputElement);
-    const contentInput = (document.querySelector(
+    ) as HTMLInputElement;
+
+    const contentInput = document.querySelector(
       "div#create-note-dialog textarea"
-    ) as HTMLTextAreaElement);
+    ) as HTMLTextAreaElement;
 
     if (titleInput.value && contentInput.value) {
       NoteManagement.createNote(titleInput.value, contentInput.value);
+
       NewNoteDialog.hide();
+      
       ErrorManagement.toast({
         text: "Note created!",
         title: "",
@@ -148,16 +168,18 @@ class NND {
         delay: 3000,
       });
     }
+
     NoteManagement.refreshAll();
   }
 
   processtask() {
-    const titleInput = (document.querySelector(
+    const titleInput = document.querySelector(
       "div#create-note-dialog input"
-    ) as HTMLInputElement);
+    ) as HTMLInputElement;
 
     if (titleInput.value) {
-      taskManagement.createtask(titleInput.value);
+      TaskManagement.createTask(titleInput.value);
+
       NewNoteDialog.hide();
     } else {
       ErrorManagement.toast({
@@ -167,21 +189,23 @@ class NND {
       });
     }
 
-    taskManagement.refreshAll();
+    TaskManagement.refreshAll();
   }
 
   initDone = false;
 }
 
-const typeNames = new Map<string, string>([
-  ["note", "Note"],
-  ["task", "Task"],
-]);
-
-export enum dialogTypes {
-  task,
-  note,
-  edit,
+export interface NewNoteDialogData {
+  windowTitle: string;
+  nodeTitle: string;
+  nodeContent?: string;
+  hideTitleField: boolean;
+  hideContentField: boolean;
+  buttonText: string;
+  buttonAction: (title: string, content: string) => void;
+  clearFields: boolean;
+  contentFieldText?: string;
+  titleFieldText?: string;
 }
 
 export const NewNoteDialog = new NND();

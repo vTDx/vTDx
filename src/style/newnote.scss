@@ -17,6 +17,7 @@ div#create-note-dialog {
   border-radius: 0.4em;
   background-color: var(--bg);
   box-shadow: 0 0 18px #121212aa;
+  min-height: 140px;
 }
 
 div#create-note-dialog-shade {
@@ -47,4 +48,12 @@ div#create-note-dialog.hidden,
 div#create-note-dialog-shade.hidden {
   opacity: 0;
   visibility: hidden;
+}
+
+div#create-note-dialog button+button {
+  margin-left:10px;
+}
+
+div#create-note-dialog h3 {
+  margin-top:10px;
 }

@@ -5,10 +5,15 @@ div.note {
   height: max-content;
   position: relative;
   border-bottom: #fff1 2px solid;
-  padding-bottom: 1.2em;
+  padding-top: 20px;
+  margin-bottom: 0;
 }
 
 div.note .header {
+  margin: 0;
+}
+
+div.note .header p {
   margin: 0;
 }
 
@@ -18,9 +23,24 @@ div.note .content {
   font-family: monospace;
 }
 
-div.note button {
+div.note .content h1,
+div.note .content h2,
+div.note .content h3,
+div.note .content h4,
+div.note .content h5 {
+  margin: 0;
+}
+
+div.note ul {
+  margin: 0;
+  line-height: 0.7;
+}
+
+div.note button.edit,
+div.note button.pin,
+div.note button.delete {
   position: absolute;
-  top: 10px;
+  top: 15px;
   padding: 0;
   background: none;
   transition: color 0.3s, opacity 0.3s;
@@ -28,7 +48,9 @@ div.note button {
   background: none !important;
 }
 
-div.note button:active {
+div.note button.edit:active,
+div.note button.pin:active,
+div.note button.delete:active {
   opacity: 0.75;
 }
 

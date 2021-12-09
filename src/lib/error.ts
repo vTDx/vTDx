@@ -4,6 +4,7 @@ class EM {
     const message = data!.message;
 
     let target = document.getElementById(id);
+    
     if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
 
     target.innerHTML = "";

@@ -30,9 +30,11 @@ class HPUI {
             document.getElementById(`button-page-${page[0]}`)!
           );
         });
+
         button.addEventListener("mouseenter", () => {
           icon.style.color = `var(--${colors[page[1].color]!})`;
         });
+        
         button.addEventListener("mouseleave", () => {
           icon.style.color = "";
         });

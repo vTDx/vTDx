@@ -25,13 +25,16 @@ class SBUI {
 
         button.append(icon);
         button.append(text);
+
         button.addEventListener("click", () =>
           PageManagement.switch(page[0], button)
         );
+        
         button.addEventListener("mouseenter", () => {
           icon.style.color = `var(--${colors[page[1].color]})`;
           text.style.color = `var(--${colors[page[1].color]})`;
         });
+        
         button.addEventListener("mouseleave", () => {
           icon.style.color = ``;
           text.style.color = ``;
@@ -51,6 +54,7 @@ class SBUI {
         
         if (page[1].hasCountableContent) {
           const numberSpan = document.createElement("span");
+
           numberSpan.className = "counter";
           numberSpan.innerText = "0";
 
@@ -85,6 +89,7 @@ class SBUI {
         icon.style.color = `var(--${colors[action[1].color]})`;
         text.style.color = `var(--${colors[action[1].color]})`;
       });
+      
       button.addEventListener("mouseleave", () => {
         icon.style.color = ``;
         text.style.color = ``;

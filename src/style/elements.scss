@@ -36,8 +36,27 @@ div.content {
   padding: var(--sidebar-padding);
   overflow-y: scroll;
   transition:width 0.3s, left 0.3s;
+  font-size: 16px;
+  line-height: 1;
+  word-wrap: break-word;
 }
 
 hr {
   border: #fff1 1px solid;
+}
+
+
+a {
+  text-decoration: none;
+  color:var(--blue);
+  font-weight: bold;
+  transition:color 0.3s, opacity 0.3s;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
+a:active {
+  opacity: 0.3;
 }

@@ -4,9 +4,11 @@ import { colorSchemes, themeStore } from "../themestore";
 class TSUI {
   refreshAll(clear?: boolean) {
     const themes = ThemeManagement.getThemes();
+
     const darkmodeTarget = document.querySelectorAll(
       "div#page-themeselector #darkmode"
     )![0];
+
     const lightmodeTarget = document.querySelectorAll(
       "div#page-themeselector #lightmode"
     )![0];
@@ -41,9 +43,11 @@ class TSUI {
       applyButton.className = "apply";
       applyButton.innerText =
         localStorage.getItem("theme") == themes[i][0] ? `Applied` : `Apply`;
+
       applyButton.addEventListener("click", () => {
         ThemeManagement.applyTheme(themes[i][0], true);
       });
+
       if (localStorage.getItem("theme") == themes[i][0]) {
         applyButton.setAttribute("disabled", "true");
       }
@@ -74,16 +78,22 @@ class TSUI {
       if (themes[i][1].userSelectable == true) {
         if (colorSchemes[themes[i][1]!.scheme] == "darkmode") {
           darkmodeCounter++;
+          
           darkmodeTarget.append(div);
+          
           if (darkmodeCounter == 3) {
             darkmodeCounter = 0;
+
             darkmodeTarget.append(document.createElement("br"));
           }
         } else if (colorSchemes[themes[i][1]!.scheme] == "lightmode") {
           lightmodeCounter++;
+
           lightmodeTarget.append(div);
+          
           if (lightmodeCounter == 3) {
             lightmodeCounter = 0;
+          
             lightmodeTarget.append(document.createElement("br"));
           }
         }

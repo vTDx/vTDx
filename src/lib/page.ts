@@ -25,6 +25,7 @@ class PM {
     let dispName: string = `Page Not Found: ${
       pages.get(page)!.dispName || "Unknown Page"
     }`;
+    
     let colorValue: string = "var(--red)";
 
     if (pgHTML && pages.has(page)) {
@@ -40,9 +41,11 @@ class PM {
 
       colorValue = `var(--${colors[pages.get(page)?.color!]})`;
       dispName = pages.get(page)!.dispName!;
+
       document.title = `vTDx - ${pages.get(page)!.dispName}`;
     } else {
       this.switch("error");
+
       const data: Error = {
         message: "Sorry, that page doesn't seem to exist.",
         materialIcon: "web_asset_off",
@@ -52,6 +55,7 @@ class PM {
         },
         id: "page-error",
       };
+      
       ErrorManagement.newError(data);
       document.getElementById("page-dot")!.style.color = colorValue;
       document.getElementById("page-disp")!.innerText = dispName;

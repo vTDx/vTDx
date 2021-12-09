@@ -1,9 +1,9 @@
+import hljs from "highlight.js/lib/core";
 import { ErrorManagement } from "./error";
 import { Error } from "./error";
-import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { PageManagement } from "./page";
-import showdown from "showdown";
-import hljs from "highlight.js/lib/core";
+import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
+import { MarkDown } from "./markdown";
 class NM {
   countPinned(): number {
     let pinned = 0;
@@ -18,9 +18,7 @@ class NM {
   }
 
   countUnpinned(): number {
-    const pinned = this.countPinned();
-
-    return this.getNotes().length - pinned;
+    return this.getNotes().length - this.countPinned();
   }
 
   countNotes(): number {
@@ -48,7 +46,19 @@ class NM {
         id: "page-allnotes",
         buttonCaption: "Create a note",
         buttonAction: () => {
-          NewNoteDialog.show(dialogTypes.note, true);
+          const data: NewNoteDialogData = {
+            windowTitle: "Create new Note",
+            nodeTitle: "Title",
+            hideTitleField: false,
+            hideContentField: false,
+            buttonText: "Create note",
+            buttonAction: (title: string, content: string) => {
+              NoteManagement.createNote(title, content);
+              NoteManagement.refreshAll();
+            },
+            clearFields: true,
+          };
+          NewNoteDialog.show(data);
         },
       };
       ErrorManagement.newError(messageData);
@@ -66,7 +76,6 @@ class NM {
     let pinnedAmount = 0;
 
     for (let i = 0; i < notes.length; i++) {
-      console.log(notes[i].pinned);
       if (notes[i].pinned) {
         this.displayNote(i, target);
         pinnedAmount++;
@@ -94,13 +103,11 @@ class NM {
   refreshAll() {
     this.populateAllNotes(true);
     this.populatePinnedNotes(true);
-    console.log(
-      `Pinned: ${this.countPinned()} | Unpinned: ${this.countUnpinned()} | Notes: ${this.countNotes()}`
-    );
 
     const allNotesCounter = (document.querySelector(
       "button#button-page-allnotes span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
+
     const PinNotesCounter = (document.querySelector(
       "button#button-page-pinned span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
@@ -178,25 +185,24 @@ class NM {
       target =
         document.getElementById("page-allnotes") ||
         document.createElement("div");
-    const notes = this.getNotes();
 
-    const converter = new showdown.Converter();
+    const notes = this.getNotes();
 
     const note = document.createElement("div");
     const header = document.createElement("h3");
-    const headerText = document.createTextNode(notes[i]!.title);
     const content = document.createElement("p");
     const deleteButton = document.createElement("button");
     const deleteButtonIcon = document.createElement("span");
     const pinButton = document.createElement("button");
     const pinButtonIcon = document.createElement("span");
+    const editButton = document.createElement("button");
+    const editButtonIcon = document.createElement("span");
 
     header.className = "header";
     content.className = "content";
 
     deleteButton.className = "delete";
     deleteButton.title = "Delete Note";
-
     deleteButton.addEventListener("click", () => {
       this.deleteNote(i);
       this.refreshAll();
@@ -204,9 +210,15 @@ class NM {
 
     pinButton.className = `pin${notes[i].pinned ? " unpin" : ""}`;
     pinButton.title = `${notes[i].pinned ? "Unpin" : "Pin"} this Note`;
-
     pinButton.addEventListener("click", () => {
       this.togglePinnedNote(i);
+      this.refreshAll();
+    });
+
+    editButton.className = "edit";
+    editButton.title = "Edit this Note";
+    editButton.addEventListener("click", () => {
+      this.editNote(i);
       this.refreshAll();
     });
 
@@ -216,20 +228,53 @@ class NM {
     pinButtonIcon.className = "material-icons";
     pinButtonIcon.innerText = `bookmark${notes[i].pinned ? "_remove" : "_add"}`;
 
-    header.append(headerText);
-    content.innerHTML = converter.makeHtml(notes[i]!.content);
+    editButtonIcon.className = "material-icons";
+    editButtonIcon.innerText = "edit";
+
+    header.innerHTML = MarkDown.toHTML(notes[i]!.title);
+    content.innerHTML = MarkDown.toHTML(notes[i]!.content);
+
     deleteButton.append(deleteButtonIcon);
     pinButton.append(pinButtonIcon);
+    editButton.append(editButtonIcon);
 
     note.className = "note";
-    note.append(header, content, deleteButton, pinButton);
+    note.append(header, content, deleteButton, pinButton, editButton);
 
     target.append(note);
 
     document.querySelectorAll("code.ts.language-ts").forEach((el) => {
-      console.log(el);
       hljs.highlightElement(el as HTMLElement);
     });
+  }
+
+  editNote(i: number) {
+    const json: Note[] = this.getNotes();
+    const data: NewNoteDialogData = {
+      windowTitle: "Edit Note",
+      nodeTitle: "Title",
+      hideTitleField: false,
+      hideContentField: false,
+      buttonText: "edit note",
+      contentFieldText: json[i]?.content,
+      titleFieldText: json[i]?.title,
+      buttonAction: (title: string, content: string) => {
+        const note: Note = {
+          title,
+          content,
+          pinned: json[i]?.pinned,
+        };
+
+        json[i] = note;
+
+        localStorage.setItem("notestore", JSON.stringify(json));
+        
+        NoteManagement.refreshAll();
+      },
+      clearFields: false,
+    };
+
+    NewNoteDialog.show(data);
   }
 }
 
