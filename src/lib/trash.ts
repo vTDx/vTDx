@@ -1,5 +1,5 @@
 import hljs from "highlight.js";
-import { ErrorManagement, Error } from "./error";
+import { ErrorManagement, Error, ToastData } from "./error";
 import { MarkDown } from "./markdown";
 import { NoteManagement } from "./notes";
 import { PageManagement } from "./page";
@@ -246,11 +246,6 @@ class TM {
 
     if (i <= json.length) {
       json.splice(i, 1);
-      ErrorManagement.toast({
-        text: `Task #${i + 1} deleted.`,
-        title: "",
-        delay: 3000,
-      });
     }
 
     localStorage.setItem("taskstore", JSON.stringify(json));
@@ -271,14 +266,40 @@ class TM {
     }
 
     this.populateTrashPage();
-  }
+    
+    if ((this.countDeletedNotes() + this.countDeletedTasks()) > 0) {
+      this.emptyTrash();
+    } else {
+      const toast:ToastData = {
+        title:"",
+        text:"Trash emptied.",
+        delay:3000
+      }
 
-  countDeletedNotes() {
-
+      ErrorManagement.toast(toast);
+    }
   }
 
   countDeletedTasks() {
-    
+    let counter = 0;
+    const tasks = TaskManagement.getTasks();
+
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].deleted) counter++;
+    }
+
+    return counter;
+  }
+
+  countDeletedNotes() {
+    let counter = 0;
+    const notes = NoteManagement.getNotes();
+
+    for (let i = 0; i < notes.length; i++) {
+      if (notes[i].deleted) counter++;
+    }
+
+    return counter;
   }
 }
 
