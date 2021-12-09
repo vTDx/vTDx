@@ -1,0 +1,109 @@
+pre {
+  padding: 10px;
+  background: var(--topbar-bg);
+  font-family: "Ubuntu Mono", monospace;
+  border-radius: 5px;
+}
+
+pre * {
+  font-family: "Ubuntu Mono", monospace !important;
+}
+
+pre code {
+    background-color: transparent !important;
+    background:transparent;
+}
+
+.hljs {
+  color: var(--fg);
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--gray);
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: var(--purple);
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: var(--red);
+}
+
+.hljs-literal {
+  color: var(--aqua);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: var(--green);
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: var(--orange);
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: var(--blue);
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: var(--orange);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+blockquote {
+  background: var(--topbar-bg);
+  border-left: 10px solid var(--input-bg);
+  padding: 0.5em 10px;
+  padding-top:0;
+  padding-bottom:15px;
+  margin:0;
+  border-radius: 5px;
+}
+
+blockquote p {
+  display: inline;
+}
+
+code {
+    padding:5px;
+    border-radius: 5px;
+    background-color: var(--topbar-bg);
+    font-family: 'Ubuntu Mono', monospace;
+}

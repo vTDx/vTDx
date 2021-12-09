@@ -2,6 +2,8 @@ import { ErrorManagement } from "./error";
 import { Error } from "./error";
 import { dialogTypes, NewNoteDialog } from "./newnotedialog";
 import { PageManagement } from "./page";
+import showdown from "showdown";
+import hljs from "highlight.js/lib/core";
 class NM {
   countPinned(): number {
     let pinned = 0;
@@ -21,13 +23,15 @@ class NM {
     return this.getNotes().length - pinned;
   }
 
-
-  countNotes():number {
+  countNotes(): number {
     return this.getNotes().length;
   }
 
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
+    if (!target)
+      target =
+        document.getElementById("page-allnotes") ||
+        document.createElement("div");
 
     if (clear) target.innerHTML = "";
 
@@ -52,7 +56,9 @@ class NM {
   }
 
   populatePinnedNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target) target = document.getElementById("page-pinned") || document.createElement("div");
+    if (!target)
+      target =
+        document.getElementById("page-pinned") || document.createElement("div");
 
     if (clear) target.innerHTML = "";
 
@@ -76,7 +82,8 @@ class NM {
         buttonAction: () => {
           PageManagement.switch(
             "allnotes",
-            document.getElementById("button-page-allnotes") || document.createElement("div")
+            document.getElementById("button-page-allnotes") ||
+              document.createElement("div")
           );
         },
       };
@@ -87,10 +94,16 @@ class NM {
   refreshAll() {
     this.populateAllNotes(true);
     this.populatePinnedNotes(true);
-    console.log(`Pinned: ${this.countPinned()} | Unpinned: ${this.countUnpinned()} | Notes: ${this.countNotes()}`);
+    console.log(
+      `Pinned: ${this.countPinned()} | Unpinned: ${this.countUnpinned()} | Notes: ${this.countNotes()}`
+    );
 
-    const allNotesCounter = (document.querySelector("button#button-page-allnotes span.counter") || document.createElement("div")) as HTMLSpanElement;
-    const PinNotesCounter = (document.querySelector("button#button-page-pinned span.counter") || document.createElement("div")) as HTMLSpanElement;
+    const allNotesCounter = (document.querySelector(
+      "button#button-page-allnotes span.counter"
+    ) || document.createElement("div")) as HTMLSpanElement;
+    const PinNotesCounter = (document.querySelector(
+      "button#button-page-pinned span.counter"
+    ) || document.createElement("div")) as HTMLSpanElement;
 
     allNotesCounter.innerText = `${this.countNotes()}`;
     PinNotesCounter.innerText = `${this.countPinned()}`;
@@ -161,14 +174,18 @@ class NM {
   }
 
   displayNote(i: number, target: HTMLElement) {
-    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
+    if (!target)
+      target =
+        document.getElementById("page-allnotes") ||
+        document.createElement("div");
     const notes = this.getNotes();
+
+    const converter = new showdown.Converter();
 
     const note = document.createElement("div");
     const header = document.createElement("h3");
     const headerText = document.createTextNode(notes[i]!.title);
     const content = document.createElement("p");
-    const contentText = document.createTextNode(notes[i]!.content);
     const deleteButton = document.createElement("button");
     const deleteButtonIcon = document.createElement("span");
     const pinButton = document.createElement("button");
@@ -200,7 +217,7 @@ class NM {
     pinButtonIcon.innerText = `bookmark${notes[i].pinned ? "_remove" : "_add"}`;
 
     header.append(headerText);
-    content.append(contentText);
+    content.innerHTML = converter.makeHtml(notes[i]!.content);
     deleteButton.append(deleteButtonIcon);
     pinButton.append(pinButtonIcon);
 
@@ -208,6 +225,11 @@ class NM {
     note.append(header, content, deleteButton, pinButton);
 
     target.append(note);
+
+    document.querySelectorAll("code.ts.language-ts").forEach((el) => {
+      console.log(el);
+      hljs.highlightElement(el as HTMLElement);
+    });
   }
 }
 

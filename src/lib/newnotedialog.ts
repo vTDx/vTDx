@@ -36,6 +36,10 @@ class NND {
     titleInput.className = "fullwidth";
     contentInput.className = "fullwidth";
 
+    titleInput.id = "title-inp";
+
+    contentInput.id = "content-inp";
+
     controls.className = "bottomright";
 
     cancelButton.id = "cancel-button";
@@ -177,6 +181,7 @@ const typeNames = new Map<string, string>([
 export enum dialogTypes {
   task,
   note,
+  edit,
 }
 
 export const NewNoteDialog = new NND();

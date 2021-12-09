@@ -14,6 +14,8 @@ div.note .header {
 
 div.note .content {
   margin: 0;
+  white-space: pre;
+  font-family: monospace;
 }
 
 div.note button {
@@ -22,7 +24,7 @@ div.note button {
   padding: 0;
   background: none;
   transition: color 0.3s, opacity 0.3s;
-  border-bottom:none !important;
+  border-bottom: none !important;
   background: none !important;
 }
 
@@ -31,7 +33,7 @@ div.note button:active {
 }
 
 div.note button.delete {
-  right: 40px;
+  right: 5px;
 }
 
 div.note button.delete:hover {
@@ -39,11 +41,19 @@ div.note button.delete:hover {
 }
 
 div.note button.pin {
-  right: 5px;
+  right: 40px;
 }
 
 div.note button.pin:hover {
   color: var(--green);
+}
+
+div.note button.edit {
+  right: 75px;
+}
+
+div.note button.edit:hover {
+  color: var(--orange);
 }
 
 div.note .content {
