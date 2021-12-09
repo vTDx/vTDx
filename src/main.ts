@@ -15,7 +15,6 @@ import { ThemeSelectorUI } from "./lib/pages/themeselector";
 import javascript from 'highlight.js/lib/languages/typescript';
 import typescript from 'highlight.js/lib/languages/javascript';
 import { DOM } from './lib/dom';
-import { Confirmation, ConfirmationBox } from './lib/confirm';
 
 hljs.registerLanguage('ts', typescript);
 hljs.registerLanguage('js', javascript);
