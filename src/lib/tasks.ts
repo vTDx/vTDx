@@ -174,6 +174,12 @@ class TDM {
     json.push(data);
 
     localStorage.setItem("taskstore", JSON.stringify(json));
+
+    ErrorManagement.toast({
+      title: "",
+      text: "Task Created!",
+      delay: 3000,
+    });
   }
 
   displayTask(i: number, target: HTMLElement) {
@@ -373,6 +379,12 @@ class TDM {
 
         localStorage.setItem("taskstore", JSON.stringify(json));
         TaskManagement.refreshAll();
+
+        ErrorManagement.toast({
+          text: `Task #${i + 1} saved.`,
+          title: "",
+          delay: 3000,
+        });
       },
       clearFields: false,
     };

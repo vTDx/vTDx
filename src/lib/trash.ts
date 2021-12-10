@@ -88,7 +88,8 @@ class TM {
       }
     }
 
-    if (!taskCounter) tasksHeader.style.display = "none";
+    if (taskCounter <= 0) tasksHeader.style.display = "none";
+    else tasksHeader.style.display = "";
 
     target.append(notesHeader);
 
@@ -96,11 +97,11 @@ class TM {
       if (notes[i].deleted) {
         this.displayTrashNote(i, target);
         noteCounter++;
-        tasksHeader.style.display = "";
       }
     }
 
-    if (!noteCounter) notesHeader.style.display = "none";
+    if (noteCounter <= 0) notesHeader.style.display = "none";
+    else notesHeader.style.display = "";
 
     if (!noteCounter && !taskCounter) {
       const messageData: Error = {
@@ -114,6 +115,10 @@ class TM {
       };
       ErrorManagement.newError(messageData);
     }
+
+    console.log(noteCounter,taskCounter);
+
+    console.log(noteCounter);
   }
 
   displayTrashNote(i: number, target: HTMLElement) {
@@ -258,11 +263,11 @@ class TM {
     const notes = NoteManagement.getNotes();
 
     for (let t = 0; t < tasks.length; t++) {
-      this.deleteTaskForever(t);
+      if (tasks[t]?.deleted) this.deleteTaskForever(t);
     }
 
     for (let n = 0; n < notes.length; n++) {
-      this.deleteNoteForever(n);
+      if (notes[n]?.deleted) this.deleteNoteForever(n);
     }
 
     this.populateTrashPage();

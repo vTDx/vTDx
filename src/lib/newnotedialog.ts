@@ -114,8 +114,10 @@ class NND {
 
       createButton.addEventListener("click", x);
 
-      function x() {
+      function x(e:Event) {
         createButton.removeEventListener("click", x);
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
         const title =
           (document.getElementById("title-inp") as HTMLInputElement).value ||

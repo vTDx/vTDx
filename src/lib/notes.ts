@@ -95,7 +95,7 @@ class NM {
     let pinnedAmount = 0;
 
     for (let i = 0; i < notes.length; i++) {
-      if (notes[i].pinned && notes[i].deleted) {
+      if (notes[i].pinned && !notes[i].deleted) {
         this.displayNote(i, target);
         pinnedAmount++;
       }
@@ -148,6 +148,12 @@ class NM {
     json.push(newNote);
 
     localStorage.setItem("notestore", JSON.stringify(json));
+
+    ErrorManagement.toast({
+      text: `Note Created!`,
+      title: "",
+      delay: 3000,
+    });
   }
 
   deleteNote(i: number) {
@@ -155,6 +161,12 @@ class NM {
 
     if (i <= notes.length) {
       TrashManagement.moveNoteToTrash(i);
+
+      ErrorManagement.toast({
+        text: `Note #${i + 1} moved to trash.`,
+        title: "",
+        delay: 3000,
+      });
     }
   }
 
@@ -163,6 +175,12 @@ class NM {
 
     if (i <= notes.length) {
       notes[i].pinned = true;
+
+      ErrorManagement.toast({
+        text: `Pinned Note #${i + 1}.`,
+        title: "",
+        delay: 3000,
+      });
     }
 
     localStorage.setItem("notestore", JSON.stringify(notes));
@@ -173,6 +191,12 @@ class NM {
 
     if (i <= notes.length) {
       notes[i].pinned = false;
+
+      ErrorManagement.toast({
+        text: `Unpinned Note #${i + 1}.`,
+        title: "",
+        delay: 3000,
+      });
     }
 
     localStorage.setItem("notestore", JSON.stringify(notes));
@@ -289,6 +313,12 @@ class NM {
         localStorage.setItem("notestore", JSON.stringify(json));
 
         NoteManagement.refreshAll();
+
+        ErrorManagement.toast({
+          text: `Note #${i + 1} saved.`,
+          title: "",
+          delay: 3000,
+        });
       },
       clearFields: false,
     };
