@@ -25,7 +25,7 @@ class TM {
       }
 
       if (themeStore.get(theme)?.scheme == colorSchemes.lightmode) {
-        innerRule += `--topbar-bg: #0001; --sidebar-bg: #00000004; --input-bg: #00000006`;
+        innerRule += `--topbar-bg: #0002; --sidebar-bg: #00000011; --input-bg: #00000006`;
       }
 
       let rule = `${ruleIdentifier}${innerRule.trimEnd()} }`;

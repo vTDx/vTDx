@@ -97,7 +97,8 @@ export const pages = new Map<string, Page>([
       dispName:"Trash",
       materialIcon:"delete",
       onSidebar:true,
-      color:colors.red
+      color:colors.red,
+      inTopBar:true
     }
   ]
 ]);

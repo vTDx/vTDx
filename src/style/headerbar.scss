@@ -13,6 +13,8 @@ div.headerbar div.page-display {
 div.headerbar div.page-display h3 {
   display: inline-block;
   margin-right: 10px;
+  border-right: var(--sidebar-bg) 3px solid;
+  padding-right: 11px;
 }
 
 div.headerbar div.page-display * {
