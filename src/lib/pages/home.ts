@@ -7,7 +7,9 @@ class HPUI {
     const target = document.querySelectorAll(
       "#page-home>div.centered-absolute"
     );
+
     let counter = 0;
+    
     for (const page of pages) {
       if (page[1].onHome && !page[1].default) {
         counter++;

@@ -29,6 +29,7 @@ class TM {
       }
 
       let rule = `${ruleIdentifier}${innerRule.trimEnd()} }`;
+      
       this.getBottomStyleSheet().insertRule(rule, 0);
 
       if (setLS) localStorage.setItem("theme", theme);

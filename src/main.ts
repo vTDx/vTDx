@@ -52,11 +52,3 @@ PageManagement.switch(
 
 // Populate home screen buttons
 HomePageUserInterface.populateHomeButtons();
-/* 
-for (let i=0;i<10;i++) {
-  NoteManagement.createNote(`${Math.floor(Math.random() * 10000)}`,`${Math.floor(Math.random() * 10000)}`)
-}
-
-for (let i=0;i<10;i++) {
-  TaskManagement.createTask(`${Math.floor(Math.random() * 10000)}`)
-} */

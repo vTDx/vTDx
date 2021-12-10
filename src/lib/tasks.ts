@@ -43,12 +43,12 @@ class TDM {
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.getTasks();
+      const Tasks = this.getTasks();
 
       let taskCounter = 0;
 
-      for (let i = 0; i < tasks.length; i++) {
-        if (!tasks[i]?.deleted) {
+      for (let i = 0; i < Tasks.length; i++) {
+        if (!Tasks[i]?.deleted) {
           this.displayTask(i, target);
           taskCounter++;
         }
@@ -57,7 +57,7 @@ class TDM {
       if (!taskCounter) {
         const messageData: Error = {
           materialIcon: "broken_image",
-          message: "You have no tasks",
+          message: "You have no Tasks",
           id: "page-task",
           buttonCaption: "Create a task",
           buttonAction: () => {
@@ -90,11 +90,11 @@ class TDM {
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.getTasks();
+      const Tasks = this.getTasks();
       let unfinishedTaskCount = 0;
 
-      for (let i = 0; i < tasks.length; i++) {
-        if (!tasks[i].finished && !tasks[i]?.deleted) {
+      for (let i = 0; i < Tasks.length; i++) {
+        if (!Tasks[i].finished && !Tasks[i]?.deleted) {
           this.displayTask(i, target);
           unfinishedTaskCount++;
         }
@@ -102,12 +102,12 @@ class TDM {
 
       if (!unfinishedTaskCount) {
         const messageData: Error = {
-          materialIcon: tasks.length ? "check" : "broken_image",
-          message: tasks.length
-            ? "All your tasks are finished!"
-            : "You don't have any tasks!",
+          materialIcon: Tasks.length ? "check" : "broken_image",
+          message: Tasks.length
+            ? "All your Tasks are finished!"
+            : "You don't have any Tasks!",
           id: "page-unftasks",
-          buttonCaption: "Goto your tasks",
+          buttonCaption: "Goto your Tasks",
           buttonAction: () => {
             PageManagement.switch(
               "task",
@@ -130,11 +130,11 @@ class TDM {
     if (target) {
       if (clear) target.innerHTML = "";
 
-      const tasks = this.getTasks();
+      const Tasks = this.getTasks();
       let finishedTaskCount = 0;
 
-      for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].finished && !tasks[i]?.deleted) {
+      for (let i = 0; i < Tasks.length; i++) {
+        if (Tasks[i].finished && !Tasks[i]?.deleted) {
           this.displayTask(i, target);
           finishedTaskCount++;
         }
@@ -142,12 +142,12 @@ class TDM {
 
       if (!finishedTaskCount) {
         const messageData: Error = {
-          materialIcon: tasks.length ? "error_outline" : "broken_image",
-          message: tasks.length
-            ? "You haven't completed any of your tasks!"
-            : "You don't have any tasks!",
+          materialIcon: Tasks.length ? "error_outline" : "broken_image",
+          message: Tasks.length
+            ? "You haven't completed any of your Tasks!"
+            : "You don't have any Tasks!",
           id: "page-fintasks",
-          buttonCaption: "Goto your tasks",
+          buttonCaption: "Goto your Tasks",
           buttonAction: () => {
             PageManagement.switch(
               "task",
@@ -183,9 +183,9 @@ class TDM {
   }
 
   displayTask(i: number, target: HTMLElement) {
-    const tasks = this.getTasks();
+    const Tasks = this.getTasks();
     
-    if (i <= tasks.length) {
+    if (i <= Tasks.length) {
       if (!target)
         target =
           document.getElementById("page-task") || document.createElement("div");
@@ -210,7 +210,7 @@ class TDM {
 
       finishedButton.className = "finish";
       finishedButton.title = `${
-        tasks[i].finished ? "Mark not done" : "Mark done"
+        Tasks[i].finished ? "Mark not done" : "Mark done"
       }`;
 
       finishedButton.addEventListener("click", () => {
@@ -232,7 +232,7 @@ class TDM {
 
       finishedButtonIcon.className = "material-icons";
       finishedButtonIcon.innerText = `${
-        tasks[i].finished ? "check_box" : "check_box_outline_blank"
+        Tasks[i].finished ? "check_box" : "check_box_outline_blank"
       }`;
 
       deleteButtonIcon.className = "material-icons";
@@ -241,7 +241,7 @@ class TDM {
       editButtonIcon.className = "material-icons";
       editButtonIcon.innerText = "edit";
 
-      header.innerHTML = MarkDown.toHTML(tasks[i]?.text);
+      header.innerHTML = MarkDown.toHTML(Tasks[i]?.text);
 
       deleteButton.append(deleteButtonIcon);
       finishedButton.append(finishedButtonIcon);
@@ -255,9 +255,9 @@ class TDM {
   }
 
   getTasks() {
-    const tasks = JSON.parse(localStorage.getItem("taskstore")!) || [];
+    const Tasks = JSON.parse(localStorage.getItem("taskstore")!) || [];
 
-    return tasks;
+    return Tasks;
   }
 
   deleteTask(i: number) {
@@ -348,7 +348,7 @@ class TDM {
     }
 
     ErrorManagement.toast({
-      text: `Marked all tasks as finished.`,
+      text: `Marked all Tasks as finished.`,
       title: "",
       delay: 3000,
     });

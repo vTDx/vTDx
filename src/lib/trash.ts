@@ -7,12 +7,12 @@ import { TaskManagement } from "./tasks";
 
 class TM {
   moveTaskToTrash(i: number) {
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
 
-    if (i <= tasks.length) {
-      tasks[i]!.deleted = true;
+    if (i <= Tasks.length) {
+      Tasks[i]!.deleted = true;
 
-      localStorage.setItem("taskstore", JSON.stringify(tasks));
+      localStorage.setItem("taskstore", JSON.stringify(Tasks));
     }
 
     this.populateTrashPage();
@@ -26,6 +26,7 @@ class TM {
 
       localStorage.setItem("notestore", JSON.stringify(notes));
     }
+
     this.populateTrashPage();
   }
 
@@ -43,13 +44,13 @@ class TM {
   }
 
   restoreTaskFromTrash(i: number) {
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
 
-    if (i <= tasks.length) {
-      tasks[i]!.deleted = false;
+    if (i <= Tasks.length) {
+      Tasks[i]!.deleted = false;
 
-      console.log(tasks[i]);
-      localStorage.setItem("taskstore", JSON.stringify(tasks));
+      console.log(Tasks[i]);
+      localStorage.setItem("taskstore", JSON.stringify(Tasks));
     }
 
     this.populateTrashPage();
@@ -58,12 +59,11 @@ class TM {
 
   populateTrashPage() {
     const target = document.getElementById("page-trash")!;
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
     const notes = NoteManagement.getNotes();
 
     const notesHeader = document.createElement("h2");
     const tasksHeader = document.createElement("h2");
-
     const noNotesText = document.createElement("p");
     const noTasksText = document.createElement("p");
 
@@ -74,17 +74,18 @@ class TM {
 
     notesHeader.innerText = "Deleted Notes";
     tasksHeader.innerText = "Deleted Tasks";
-
-    noNotesText.innerText = "There are no deleted notes.";
-    noTasksText.innerText = "There are no deleted tasks.";
+    noNotesText.innerText = "There are no deleted Notes.";
+    noTasksText.innerText = "There are no deleted Tasks.";
 
     target.append(tasksHeader);
 
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].deleted) {
+    for (let i = 0; i < Tasks.length; i++) {
+      if (Tasks[i].deleted) {
         this.displayTrashTask(i, target);
-        taskCounter++;
+
         tasksHeader.style.display = "";
+
+        taskCounter++;
       }
     }
 
@@ -182,7 +183,7 @@ class TM {
       target =
         document.getElementById("page-trash") || document.createElement("div");
 
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
 
     const task = document.createElement("div");
     const header = document.createElement("h3");
@@ -216,7 +217,7 @@ class TM {
 
     deleteButton.append(deleteButtonIcon);
 
-    header.innerHTML = MarkDown.toHTML(tasks[i]!.text);
+    header.innerHTML = MarkDown.toHTML(Tasks[i]!.text);
 
     restoreButton.append(restoreButtonIcon);
 
@@ -259,11 +260,11 @@ class TM {
   }
 
   emptyTrash() {
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
     const notes = NoteManagement.getNotes();
 
-    for (let t = 0; t < tasks.length; t++) {
-      if (tasks[t]?.deleted) this.deleteTaskForever(t);
+    for (let t = 0; t < Tasks.length; t++) {
+      if (Tasks[t]?.deleted) this.deleteTaskForever(t);
     }
 
     for (let n = 0; n < notes.length; n++) {
@@ -287,10 +288,10 @@ class TM {
 
   countDeletedTasks() {
     let counter = 0;
-    const tasks = TaskManagement.getTasks();
+    const Tasks = TaskManagement.getTasks();
 
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].deleted) counter++;
+    for (let i = 0; i < Tasks.length; i++) {
+      if (Tasks[i].deleted) counter++;
     }
 
     return counter;

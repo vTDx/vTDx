@@ -5,6 +5,7 @@ import { PageManagement } from "./page";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { MarkDown } from "./markdown";
 import { TrashManagement } from "./trash";
+
 class NM {
   countPinned(): number {
     let pinned = 0;
@@ -12,9 +13,7 @@ class NM {
     const data = this.getNotes();
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i]!.pinned && !data[i]!.deleted) {
-        pinned++;
-      }
+      if (data[i]!.pinned && !data[i]!.deleted) pinned++;
     }
 
     return pinned;
@@ -39,10 +38,7 @@ class NM {
   }
 
   populateAllNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target)
-      target =
-        document.getElementById("page-allnotes") ||
-        document.createElement("div");
+    if (!target) target = document.getElementById("page-allnotes")!;
 
     if (clear) target.innerHTML = "";
 
@@ -77,17 +73,17 @@ class NM {
             },
             clearFields: true,
           };
+
           NewNoteDialog.show(data);
         },
       };
+
       ErrorManagement.newError(messageData);
     }
   }
 
   populatePinnedNotes(clear?: boolean, target?: HTMLElement) {
-    if (!target)
-      target =
-        document.getElementById("page-pinned") || document.createElement("div");
+    if (!target) target = document.getElementById("page-pinned")!;
 
     if (clear) target.innerHTML = "";
 
@@ -115,6 +111,7 @@ class NM {
           );
         },
       };
+
       ErrorManagement.newError(messageData);
     }
   }
@@ -223,10 +220,7 @@ class NM {
   }
 
   displayNote(i: number, target: HTMLElement) {
-    if (!target)
-      target =
-        document.getElementById("page-allnotes") ||
-        document.createElement("div");
+    if (!target) target = document.getElementById("page-allnotes")!;
 
     const notes = this.getNotes();
 

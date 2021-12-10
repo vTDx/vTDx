@@ -42,7 +42,8 @@ div.content {
 }
 
 hr {
-  border: #fff1 1px solid;
+  border: var(--bg) 1px solid;
+  transition: border 0.3s;
 }
 
 

@@ -34,8 +34,10 @@ class PM {
       for (let i = 0; i < pagedivs.length; i++) {
         if (pagedivs[i] != pgHTML) {
           pagedivs[i].classList.add("hidden");
+
           continue;
         }
+
         pagedivs[i].classList.remove("hidden");
       }
 
@@ -57,10 +59,12 @@ class PM {
       };
       
       ErrorManagement.newError(data);
+
       document.getElementById("page-dot")!.style.color = colorValue;
       document.getElementById("page-disp")!.innerText = dispName;
       document.title = `vTDx - Page Not Found`;
     }
+    
     document.getElementById("page-dot")!.style.color = colorValue;
     document.getElementById("page-disp")!.innerText = dispName;
   }

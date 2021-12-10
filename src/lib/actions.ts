@@ -62,7 +62,7 @@ export const actions = new Map<string, Action>([
   [
     "newtask",
     {
-      dispName: "New task",
+      dispName: "New Task",
       materialIcon: "note_add",
       action: () => {
         const data: NewNoteDialogData = {
@@ -85,17 +85,17 @@ export const actions = new Map<string, Action>([
   [
     "clearalltasks",
     {
-      dispName: "Clear All tasks",
+      dispName: "Clear All Tasks",
       materialIcon: "clear_all",
       action: () => {
         const data: ConfirmationBox = {
           title: "Clear All Tasks",
           message:
-            "Are you sure you want to clear all tasks? There is no going back!",
+            "Are you sure you want to clear all Tasks? There is no going back!",
           confirmButtonAction: () => {
             ErrorManagement.toast({
               title: "",
-              text: "Cleared all tasks",
+              text: "Cleared all Tasks",
               delay: 3000,
             });
 
@@ -116,7 +116,18 @@ export const actions = new Map<string, Action>([
       dispName: "Complete All Tasks",
       materialIcon: "done_all",
       action: () => {
-        TaskManagement.completeAll();
+        const data: ConfirmationBox = {
+          title: "Complete All Tasks",
+          message:
+            "Are you sure you want to complete all Tasks?",
+          confirmButtonAction: () => {
+            TaskManagement.completeAll();
+          },
+          confirmButtonText: "OK",
+        };
+
+        Confirmation.display(data);
+        
       },
       color: colors.green,
       addBreak: true,
