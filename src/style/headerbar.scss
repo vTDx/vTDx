@@ -13,8 +13,7 @@ div.headerbar div.page-display {
 div.headerbar div.page-display h3 {
   display: inline-block;
   margin-right: 10px;
-  border-right: var(--sidebar-bg) 3px solid;
-  padding-right: 11px;
+  padding-right: 0px;
 }
 
 div.headerbar div.page-display * {
@@ -104,4 +103,15 @@ div.headerbar button.page.option span.counter {
 
 div.headerbar button.option span {
   transition: color 0.1s, opacity 0.3s, visibility 0.3s;
+}
+
+div.headerbar #actions,
+div.headerbar #pages {
+  border-left: var(--sidebar-bg) 3px solid;
+  padding-left:10px;
+  height:25px;
+}
+
+div.headerbar #actions button {
+  margin-right:0 !important;
 }

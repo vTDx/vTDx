@@ -29,12 +29,12 @@ class SBUI {
         button.addEventListener("click", () =>
           PageManagement.switch(page[0], button)
         );
-        
+
         button.addEventListener("mouseenter", () => {
           icon.style.color = `var(--${colors[page[1].color]})`;
           text.style.color = `var(--${colors[page[1].color]})`;
         });
-        
+
         button.addEventListener("mouseleave", () => {
           icon.style.color = ``;
           text.style.color = ``;
@@ -42,7 +42,7 @@ class SBUI {
 
         if (!page[1].inTopBar) {
           sidebar?.append(button);
-          
+
           if (page[1].addBreak) {
             sidebar?.append(document.createElement("hr"));
           }
@@ -51,7 +51,7 @@ class SBUI {
 
           topbar?.append(button);
         }
-        
+
         if (page[1].hasCountableContent) {
           const numberSpan = document.createElement("span");
 
@@ -62,10 +62,13 @@ class SBUI {
         }
       }
     }
+
+    this.trimHRs();
   }
 
   populateActions() {
     const sidebar = document.querySelector("div.sidebar>div#actions");
+    const topbar = document.querySelector("div.headerbar #actions")!;
 
     for (const action of actions) {
       const icon = document.createElement("span");
@@ -89,21 +92,30 @@ class SBUI {
         icon.style.color = `var(--${colors[action[1].color]})`;
         text.style.color = `var(--${colors[action[1].color]})`;
       });
-      
+
       button.addEventListener("mouseleave", () => {
         icon.style.color = ``;
         text.style.color = ``;
       });
 
-      sidebar?.append(button);
-      if (action[1].addBreak) {
-        sidebar?.append(document.createElement("hr"));
+      if (!action[1].inTopBar) {
+        sidebar?.append(button);
+        if (action[1].addBreak) {
+          sidebar?.append(document.createElement("hr"));
+        }
+      } else {
+        text.style.display = "none";
+
+        topbar?.append(button);
       }
     }
+
+    this.trimHRs();
   }
 
   toggleSidebar() {
-    const sidebarCollapsed = localStorage.getItem("sidebar-collapsed") || "false";
+    const sidebarCollapsed =
+      localStorage.getItem("sidebar-collapsed") || "false";
 
     if (sidebarCollapsed == "true") {
       SideBarUI.expandSidebar();
@@ -115,28 +127,45 @@ class SBUI {
   expandSidebar() {
     document.body.classList.remove("sidebar-collapsed");
 
-    localStorage.setItem("sidebar-collapsed","false");
+    localStorage.setItem("sidebar-collapsed", "false");
   }
 
   collapseSidebar() {
     document.body.classList.add("sidebar-collapsed");
 
-    localStorage.setItem("sidebar-collapsed","true");
+    localStorage.setItem("sidebar-collapsed", "true");
   }
 
-  init() {  
+  init() {
     this.syncSidebarState();
-    
-    document.getElementById("sidebar-toggle")!.addEventListener("click", () => {SideBarUI.toggleSidebar(); SideBarUI.syncSidebarState()})
+
+    document.getElementById("sidebar-toggle")!.addEventListener("click", () => {
+      SideBarUI.toggleSidebar();
+      SideBarUI.syncSidebarState();
+    });
   }
 
   syncSidebarState() {
-    const sidebarCollapsed = localStorage.getItem("sidebar-collapsed") || "false";
+    const sidebarCollapsed =
+      localStorage.getItem("sidebar-collapsed") || "false";
 
     if (sidebarCollapsed == "true") {
       SideBarUI.collapseSidebar();
     } else {
       SideBarUI.expandSidebar();
+    }
+  }
+
+  trimHRs() {
+    const pages = document.querySelector("div.sidebar>#pages")!;    
+    const actns = document.querySelector("div.sidebar>#actions")!;
+
+    if (pages.lastChild instanceof HTMLHRElement) {
+      pages.removeChild(pages.lastChild);
+    }
+
+    if (actns.lastChild instanceof HTMLHRElement) {
+      actns.removeChild(actns.lastChild);
     }
   }
 }

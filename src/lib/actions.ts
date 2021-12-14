@@ -28,6 +28,7 @@ export const actions = new Map<string, Action>([
         NewNoteDialog.show(data);
       },
       color: colors.purple,
+      inTopBar:true
     },
   ],
   [
@@ -79,7 +80,8 @@ export const actions = new Map<string, Action>([
         };
         NewNoteDialog.show(data);
       },
-      color: colors.purple,
+      color: colors.yellow,
+      inTopBar:true
     },
   ],
   [
@@ -158,5 +160,5 @@ export const actions = new Map<string, Action>([
       },
       color: colors.red,
     },
-  ],
+  ]
 ]);

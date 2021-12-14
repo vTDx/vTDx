@@ -29,12 +29,11 @@ class NND {
     textContent.className = "nomargin";
     textContent.innerText = "Content";
 
-    titleInput.className = "fullwidth";
-    contentInput.className = "fullwidth";
-
     titleInput.id = "title-inp";
+    titleInput.className = "fullwidth";
 
-    contentInput.id = "content-inp";
+    contentInput.className = "fullwidth";
+    contentInput.id = "content-inp";    
 
     controls.className = "bottomright";
 
