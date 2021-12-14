@@ -130,6 +130,22 @@ class NM {
 
     allNotesCounter.innerText = `${this.countNotes()}`;
     PinNotesCounter.innerText = `${this.countPinned()}`;
+
+    this.updatePageButtonTitles();
+  }
+
+  updatePageButtonTitles() {
+    const buttons = document.querySelectorAll("button.option.page");
+
+    for (let i=0;i<buttons.length;i++) {
+      const button = buttons?.[i] as HTMLButtonElement;
+      const counter = button.lastChild as HTMLSpanElement;
+      const innerText = (button.children[1] as HTMLSpanElement).innerText!;
+
+      if (counter.className == "counter") {
+        button.title = `${innerText} (${counter.innerText})`;
+      }
+    }
   }
 
   createNote(title: string, content: string) {
