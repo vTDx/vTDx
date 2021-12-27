@@ -137,7 +137,7 @@ class NM {
   updatePageButtonTitles() {
     const buttons = document.querySelectorAll("button.option.page");
 
-    for (let i=0;i<buttons.length;i++) {
+    for (let i = 0; i < buttons.length; i++) {
       const button = buttons?.[i] as HTMLButtonElement;
       const counter = button.lastChild as HTMLSpanElement;
       const innerText = (button.children[1] as HTMLSpanElement).innerText!;
@@ -156,6 +156,7 @@ class NM {
       content,
       pinned: false,
       deleted: false,
+      priority: priorities.low
     };
 
     json.push(newNote);
@@ -316,6 +317,7 @@ class NM {
           content,
           pinned: json[i]?.pinned,
           deleted: json[i]?.deleted,
+          priority: json[i]?.priority
         };
 
         json[i] = note;
@@ -342,6 +344,12 @@ export interface Note {
   content: string;
   pinned: boolean;
   deleted: boolean;
+  priority: priorities;
+}
+
+export enum priorities {
+  low,
+  high,
 }
 
 export const NoteManagement = new NM();
