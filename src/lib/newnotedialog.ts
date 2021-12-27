@@ -33,7 +33,7 @@ class NND {
     titleInput.className = "fullwidth";
 
     contentInput.className = "fullwidth";
-    contentInput.id = "content-inp";    
+    contentInput.id = "content-inp";
 
     controls.className = "bottomright";
 
@@ -73,15 +73,15 @@ class NND {
 
       const shade = document.getElementById("create-note-dialog-shade");
       const dialog = document.getElementById("create-note-dialog");
-      
+
       const header = document.querySelector(
         "div#create-note-dialog h3"
       ) as HTMLElement;
-      
+
       const createButton = document.querySelector(
         "div#create-note-dialog button#create-button"
       ) as HTMLButtonElement;
-      
+
       const paraphs = document.querySelectorAll(
         "div#create-note-dialog p.nomargin"
       );
@@ -113,7 +113,7 @@ class NND {
 
       createButton.addEventListener("click", x);
 
-      function x(e:Event) {
+      function x(e: Event) {
         createButton.removeEventListener("click", x);
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -132,6 +132,7 @@ class NND {
       }
 
       (paraphs[0] as HTMLParagraphElement).innerText = data.nodeTitle;
+      (paraphs[1] as HTMLParagraphElement).innerText = data.nodeContent || "";
     }
   }
 
@@ -156,7 +157,7 @@ class NND {
       NoteManagement.createNote(titleInput.value, contentInput.value);
 
       NewNoteDialog.hide();
-      
+
       ErrorManagement.toast({
         text: "Note created!",
         title: "",

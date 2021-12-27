@@ -1,7 +1,7 @@
 import { Confirmation, ConfirmationBox } from "./confirm";
 import { ErrorManagement } from "./error";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
-import { NoteManagement } from "./notes";
+import { Note, NoteManagement } from "./notes";
 import { TaskManagement } from "./tasks";
 import { TrashManagement } from "./trash";
 import { colors, Action } from "./ui";
@@ -28,7 +28,7 @@ export const actions = new Map<string, Action>([
         NewNoteDialog.show(data);
       },
       color: colors.purple,
-      inTopBar:true
+      inTopBar: true,
     },
   ],
   [
@@ -81,7 +81,7 @@ export const actions = new Map<string, Action>([
         NewNoteDialog.show(data);
       },
       color: colors.yellow,
-      inTopBar:true
+      inTopBar: true,
     },
   ],
   [
@@ -120,8 +120,7 @@ export const actions = new Map<string, Action>([
       action: () => {
         const data: ConfirmationBox = {
           title: "Complete All Tasks",
-          message:
-            "Are you sure you want to complete all Tasks?",
+          message: "Are you sure you want to complete all Tasks?",
           confirmButtonAction: () => {
             TaskManagement.completeAll();
           },
@@ -129,7 +128,6 @@ export const actions = new Map<string, Action>([
         };
 
         Confirmation.display(data);
-        
       },
       color: colors.green,
       addBreak: true,
@@ -159,6 +157,59 @@ export const actions = new Map<string, Action>([
         Confirmation.display(data);
       },
       color: colors.red,
+      addBreak: true,
     },
-  ]
+  ],
+  [
+    "exportudata",
+    {
+      dispName: "Export Userdata",
+      materialIcon: "download",
+      action: () => {
+        const data: NewNoteDialogData = {
+          windowTitle: "Export Userdata",
+          nodeTitle: "Copy the following text:",
+          nodeContent: "",
+          hideTitleField: true,
+          hideContentField: false,
+          buttonText: "OK",
+          contentFieldText: localStorage.getItem("taskstore")! || "{}",
+          titleFieldText: "",
+          buttonAction: (_: string, content: string) => {
+            NewNoteDialog.hide();
+          },
+          clearFields: false,
+        };
+
+        NewNoteDialog.show(data);
+      },
+      color: colors.red,
+    },
+  ],
+  [
+    "importudata",
+    {
+      dispName: "Import Userdata",
+      materialIcon: "upload",
+      action: () => {
+        const data: ConfirmationBox = {
+          title: "Empty Trash",
+          message: "Are you sure you want to empty the trash?",
+          confirmButtonAction: () => {
+            ErrorManagement.toast({
+              title: "",
+              text: "Trash emptied",
+              delay: 3000,
+            });
+
+            TrashManagement.emptyTrash();
+          },
+          confirmButtonText: "Empty Trash",
+        };
+
+        Confirmation.display(data);
+      },
+      color: colors.red,
+    },
+  ],
 ]);
