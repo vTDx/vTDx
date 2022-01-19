@@ -22,6 +22,10 @@ div.note .content {
   font-family: monospace;
 }
 
+div.note .content.hidden {
+  display:none;
+}
+
 div.note .content h1,
 div.note .content h2,
 div.note .content h3,
@@ -37,7 +41,8 @@ div.note ul {
 
 div.note button.edit,
 div.note button.pin,
-div.note button.delete {
+div.note button.delete,
+div.note button.expand {
   position: absolute;
   top: 15px;
   padding: 0;
@@ -49,7 +54,8 @@ div.note button.delete {
 
 div.note button.edit:active,
 div.note button.pin:active,
-div.note button.delete:active {
+div.note button.delete:active,
+div.note button.expand:active {
   opacity: 0.75;
 }
 
@@ -77,6 +83,10 @@ div.note button.edit:hover {
   color: var(--orange);
 }
 
+div.note .header {
+  padding-left:31px;
+}
+
 div.note .content {
   margin-top: 10px;
 }
@@ -87,4 +97,12 @@ div.note button.pin.unpin:hover {
 
 div#page-trash div.note {
   opacity: 0.6;
+}
+
+div.note button.expand {
+  left: 0px;
+}
+
+div.note button.expand:hover {
+  color: var(--blue);
 }

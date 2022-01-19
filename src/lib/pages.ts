@@ -9,9 +9,9 @@ export const pages = new Map<string, Page>([
       onSidebar: true,
       color: colors.blue,
       default: true,
-      addBreak:true,
-      onHome:false,
-      inTopBar:true
+      addBreak: true,
+      onHome: false,
+      inTopBar: true,
     },
   ],
   [
@@ -21,8 +21,8 @@ export const pages = new Map<string, Page>([
       materialIcon: "description",
       onSidebar: true,
       color: colors.purple,
-      hasCountableContent:true,
-      onHome:true,
+      hasCountableContent: true,
+      onHome: true,
     },
   ],
   [
@@ -32,9 +32,9 @@ export const pages = new Map<string, Page>([
       materialIcon: "bookmark",
       onSidebar: true,
       color: colors.green,
-      addBreak:true,
-      hasCountableContent:true,
-      onHome:true,
+      addBreak: true,
+      hasCountableContent: true,
+      onHome: true,
     },
   ],
   [
@@ -44,8 +44,8 @@ export const pages = new Map<string, Page>([
       materialIcon: "insert_drive_file",
       onSidebar: true,
       color: colors.yellow,
-      hasCountableContent:true,
-      onHome:true,
+      hasCountableContent: true,
+      onHome: true,
     },
   ],
   [
@@ -55,8 +55,8 @@ export const pages = new Map<string, Page>([
       materialIcon: "file_open",
       onSidebar: true,
       color: colors.orange,
-      hasCountableContent:true,
-      onHome:true,
+      hasCountableContent: true,
+      onHome: true,
     },
   ],
   [
@@ -66,21 +66,21 @@ export const pages = new Map<string, Page>([
       materialIcon: "task",
       onSidebar: true,
       color: colors.green,
-      hasCountableContent:true,
-      addBreak:true,
-      onHome:true,
+      hasCountableContent: true,
+      addBreak: true,
+      onHome: true,
     },
   ],
   [
     "themeselector",
     {
       dispName: "Themes",
-      materialIcon:"palette",
-      onSidebar:true,
-      color:colors.purple,
-      onHome:true,
-      inTopBar:true
-    }
+      materialIcon: "palette",
+      onSidebar: true,
+      color: colors.purple,
+      onHome: true,
+      inTopBar: true,
+    },
   ],
   [
     "error",
@@ -94,11 +94,11 @@ export const pages = new Map<string, Page>([
   [
     "trash",
     {
-      dispName:"Trash",
-      materialIcon:"delete",
-      onSidebar:true,
-      color:colors.red,
-      inTopBar:true
-    }
-  ]
+      dispName: "Trash",
+      materialIcon: "delete",
+      onSidebar: true,
+      color: colors.red,
+      inTopBar: true,
+    },
+  ],
 ]);

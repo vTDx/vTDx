@@ -25,7 +25,7 @@ class PM {
     let dispName: string = `Page Not Found: ${
       pages.get(page)!.dispName || "Unknown Page"
     }`;
-    
+
     let colorValue: string = "var(--red)";
 
     if (pgHTML && pages.has(page)) {
@@ -57,14 +57,14 @@ class PM {
         },
         id: "page-error",
       };
-      
+
       ErrorManagement.newError(data);
 
       document.getElementById("page-dot")!.style.color = colorValue;
       document.getElementById("page-disp")!.innerText = dispName;
       document.title = `vTDx - Page Not Found`;
     }
-    
+
     document.getElementById("page-dot")!.style.color = colorValue;
     document.getElementById("page-disp")!.innerText = dispName;
   }

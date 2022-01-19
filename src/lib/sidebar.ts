@@ -157,7 +157,7 @@ class SBUI {
   }
 
   trimHRs() {
-    const pages = document.querySelector("div.sidebar>#pages")!;    
+    const pages = document.querySelector("div.sidebar>#pages")!;
     const actns = document.querySelector("div.sidebar>#actions")!;
 
     if (pages.lastChild instanceof HTMLHRElement) {

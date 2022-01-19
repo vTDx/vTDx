@@ -1,7 +1,7 @@
 class dom {
-    init() {
-        console.warn = () => {}
-    }
+  init() {
+    console.warn = () => {};
+  }
 }
 
 export const DOM = new dom();

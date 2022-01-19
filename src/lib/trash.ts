@@ -117,7 +117,7 @@ class TM {
       ErrorManagement.newError(messageData);
     }
 
-    console.log(noteCounter,taskCounter);
+    console.log(noteCounter, taskCounter);
 
     console.log(noteCounter);
   }
@@ -272,15 +272,15 @@ class TM {
     }
 
     this.populateTrashPage();
-    
-    if ((this.countDeletedNotes() + this.countDeletedTasks()) > 0) {
+
+    if (this.countDeletedNotes() + this.countDeletedTasks() > 0) {
       this.emptyTrash();
     } else {
-      const toast:ToastData = {
-        title:"",
-        text:"Trash emptied.",
-        delay:3000
-      }
+      const toast: ToastData = {
+        title: "",
+        text: "Trash emptied.",
+        delay: 3000,
+      };
 
       ErrorManagement.toast(toast);
     }

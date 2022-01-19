@@ -11,7 +11,7 @@ class C {
       buttonAction: data.confirmButtonAction,
       clearFields: true,
     };
-    
+
     NewNoteDialog.show(dialog);
   }
 }

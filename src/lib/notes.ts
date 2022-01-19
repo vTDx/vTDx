@@ -156,7 +156,7 @@ class NM {
       content,
       pinned: false,
       deleted: false,
-      priority: priorities.low
+      priority: priorities.low,
     };
 
     json.push(newNote);
@@ -250,6 +250,8 @@ class NM {
     const pinButtonIcon = document.createElement("span");
     const editButton = document.createElement("button");
     const editButtonIcon = document.createElement("span");
+    const collapseButton = document.createElement("button");
+    const collapseButtonIcon = document.createElement("span");
 
     header.className = "header";
     content.className = "content";
@@ -275,6 +277,12 @@ class NM {
       this.refreshAll();
     });
 
+    collapseButton.className = "expand";
+    collapseButton.title = this.isCollapsed(i) ? "Expand" : "Collapse";
+    collapseButton.addEventListener("click", () => {
+      this.toggleCollapsedNote(i);
+    });
+
     deleteButtonIcon.className = "material-icons";
     deleteButtonIcon.innerText = "delete";
 
@@ -284,15 +292,32 @@ class NM {
     editButtonIcon.className = "material-icons";
     editButtonIcon.innerText = "edit";
 
+    collapseButtonIcon.className = "material-icons";
+    collapseButtonIcon.innerText = `expand_${
+      this.isCollapsed(i) ? "more" : "less"
+    }`;
+
     header.innerHTML = MarkDown.toHTML(notes[i]!.title);
     content.innerHTML = MarkDown.toHTML(notes[i]!.content);
+
+    if (this.isCollapsed(i)) {
+      content.classList.add("hidden");
+    }
 
     deleteButton.append(deleteButtonIcon);
     pinButton.append(pinButtonIcon);
     editButton.append(editButtonIcon);
+    collapseButton.append(collapseButtonIcon);
 
     note.className = "note";
-    note.append(header, content, deleteButton, pinButton, editButton);
+    note.append(
+      header,
+      content,
+      deleteButton,
+      pinButton,
+      editButton,
+      collapseButton
+    );
 
     target.append(note);
 
@@ -317,7 +342,7 @@ class NM {
           content,
           pinned: json[i]?.pinned,
           deleted: json[i]?.deleted,
-          priority: json[i]?.priority
+          priority: json[i]?.priority,
         };
 
         json[i] = note;
@@ -337,6 +362,59 @@ class NM {
 
     NewNoteDialog.show(data);
   }
+
+  isCollapsed(i: number): boolean {
+    const json: Note[] = this.getNotes();
+
+    if (json[i] && json[i]?.collapsed) {
+      return true;
+    }
+    return false;
+  }
+
+  toggleCollapsedNote(i: number) {
+    if (this.isCollapsed(i)) {
+      this.expandNote(i);
+    } else {
+      this.collapseNote(i);
+    }
+  }
+
+  expandNote(i: number) {
+    const json: Note[] = this.getNotes();
+
+    if (json[i]) {
+      json[i].collapsed = false;
+
+      localStorage.setItem("notestore", JSON.stringify(json));
+
+      ErrorManagement.toast({
+        text: `Expanded Note #${i + 1}.`,
+        title: "",
+        delay: 3000,
+      });
+    }
+
+    this.refreshAll();
+  }
+
+  collapseNote(i: number) {
+    const json: Note[] = this.getNotes();
+
+    if (json[i]) {
+      json[i].collapsed = true;
+
+      localStorage.setItem("notestore", JSON.stringify(json));
+
+      ErrorManagement.toast({
+        text: `Collapsed Note #${i + 1}.`,
+        title: "",
+        delay: 3000,
+      });
+    }
+
+    this.refreshAll();
+  }
 }
 
 export interface Note {
@@ -345,6 +423,7 @@ export interface Note {
   pinned: boolean;
   deleted: boolean;
   priority: priorities;
+  collapsed?: boolean;
 }
 
 export enum priorities {

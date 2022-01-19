@@ -4,8 +4,11 @@ class EM {
     const message = data!.message;
 
     let target = document.getElementById(id);
-    
-    if (!target) target = document.getElementById("page-allnotes") || document.createElement("div");
+
+    if (!target)
+      target =
+        document.getElementById("page-allnotes") ||
+        document.createElement("div");
 
     target.innerHTML = "";
 
@@ -37,9 +40,13 @@ class EM {
       const title = data.title;
       const text = data.text;
       const delay = data.delay || 0;
-      const toastDiv = document.getElementById("toast-div") || document.createElement("div");
-      const titleDiv = document.getElementById("toast-title") || document.createElement("div");
-      const cntntDiv = document.getElementById("toast-content") || document.createElement("div");
+      const toastDiv =
+        document.getElementById("toast-div") || document.createElement("div");
+      const titleDiv =
+        document.getElementById("toast-title") || document.createElement("div");
+      const cntntDiv =
+        document.getElementById("toast-content") ||
+        document.createElement("div");
 
       toastDiv!.classList.remove("hidden");
       titleDiv.innerText = title;
@@ -73,7 +80,8 @@ class EM {
   }
 
   hideToast() {
-    const toastDiv = document.getElementById("toast-div") || document.createElement("div");
+    const toastDiv =
+      document.getElementById("toast-div") || document.createElement("div");
 
     toastDiv.classList.add("hidden");
   }

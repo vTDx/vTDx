@@ -1,5 +1,6 @@
 div.task {
   padding: 0.7em;
+  padding-top:20px;
   width: calc(100% - var(--content-padding));
   height: max-content;
   position: relative;
@@ -51,6 +52,7 @@ div.task .header p {
 
 div.task button.finish {
   left: 0px;
+  top:15px;
 }
 
 div.task button.finish:hover {

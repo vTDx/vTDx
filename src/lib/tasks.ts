@@ -168,7 +168,7 @@ class TDM {
     const data: Task = {
       text,
       finished: false,
-      deleted:false
+      deleted: false,
     };
 
     json.push(data);
@@ -184,7 +184,7 @@ class TDM {
 
   displayTask(i: number, target: HTMLElement) {
     const Tasks = this.getTasks();
-    
+
     if (i <= Tasks.length) {
       if (!target)
         target =
@@ -282,7 +282,7 @@ class TDM {
     const tasksCounter = (document.querySelector(
       "button#button-page-task span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
-    
+
     const finishedTasksCounter = (document.querySelector(
       "button#button-page-fintasks span.counter"
     ) || document.createElement("div")) as HTMLSpanElement;
@@ -372,7 +372,7 @@ class TDM {
         const Task: Task = {
           text,
           finished: json[i]?.finished,
-          deleted: json[i]?.deleted
+          deleted: json[i]?.deleted,
         };
 
         json[i] = Task;
@@ -396,7 +396,7 @@ class TDM {
 interface Task {
   text: string;
   finished: boolean;
-  deleted:boolean;
+  deleted: boolean;
 }
 
 export const TaskManagement = new TDM();
