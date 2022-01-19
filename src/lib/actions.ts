@@ -1,7 +1,7 @@
 import { Confirmation, ConfirmationBox } from "./confirm";
 import { ErrorManagement } from "./error";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
-import { Note, NoteManagement } from "./notes";
+import { NoteManagement } from "./notes";
 import { TaskManagement } from "./tasks";
 import { TrashManagement } from "./trash";
 import { colors, Action } from "./ui";

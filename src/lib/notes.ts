@@ -140,10 +140,10 @@ class NM {
     for (let i = 0; i < buttons.length; i++) {
       const button = buttons?.[i] as HTMLButtonElement;
       const counter = button.lastChild as HTMLSpanElement;
-      const innerText = (button.children[1] as HTMLSpanElement).innerText!;
+      const innerText = (button.childNodes[1] as HTMLSpanElement)?.innerHTML;
 
       if (counter.className == "counter") {
-        button.title = `${innerText} (${counter.innerText})`;
+        button.title = `${innerText} (${counter.innerHTML})`;
       }
     }
   }

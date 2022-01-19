@@ -36,14 +36,15 @@ class TM {
 
       ThemeSelectorUI.refreshAll(true);
     } else {
-      const toastData: ToastData = {
-        title: "Unable to load theme",
-        text: `Failed to load theme "${theme}": it does not exist.\n\nThe default theme has been loaded.`,
-        delay: 3000,
-      };
+      if (localStorage.getItem("theme")) {
+        const toastData: ToastData = {
+          title: "Unable to load theme",
+          text: `Failed to load theme "${theme}": it does not exist.\n\nThe default theme has been loaded.`,
+          delay: 3000,
+        };
 
-      ErrorManagement.toast(toastData);
-
+        ErrorManagement.toast(toastData);
+      }
       this.applyTheme("default", true);
     }
   }
