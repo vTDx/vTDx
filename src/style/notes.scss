@@ -3,7 +3,7 @@ div.note {
   width: calc(100% - var(--content-padding));
   height: max-content;
   position: relative;
-  border-bottom: #fff1 2px solid;
+  border-bottom: rgba(255, 255, 255, 0.137) 2px solid;
   padding-top: 20px;
   margin-bottom: 0;
 }

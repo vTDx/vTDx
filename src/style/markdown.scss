@@ -14,6 +14,20 @@ pre code {
     background:transparent;
 }
 
+.note .content p {
+  margin:0;
+}
+
+.note .content * {
+  line-height: 100%;
+  margin:0;
+}
+
+.note .content h1 {
+  padding-bottom:5px;
+  border-bottom: rgba(255, 255, 255, 0.034) 2px solid
+}
+
 .hljs {
   color: var(--fg);
 }
