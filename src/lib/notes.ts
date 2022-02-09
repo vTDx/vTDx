@@ -5,6 +5,7 @@ import { PageManagement } from "./page";
 import { NewNoteDialog, NewNoteDialogData } from "./newnotedialog";
 import { MarkDown } from "./markdown";
 import { TrashManagement } from "./trash";
+import { actions } from "./actions";
 
 class NM {
   countPinned(): number {
@@ -61,20 +62,7 @@ class NM {
         id: "page-allnotes",
         buttonCaption: "Create a note",
         buttonAction: () => {
-          const data: NewNoteDialogData = {
-            windowTitle: "Create new Note",
-            nodeTitle: "Title",
-            hideTitleField: false,
-            hideContentField: false,
-            buttonText: "Create note",
-            buttonAction: (title: string, content: string) => {
-              NoteManagement.createNote(title, content);
-              NoteManagement.refreshAll();
-            },
-            clearFields: true,
-          };
-
-          NewNoteDialog.show(data);
+          actions.get("newnote")?.action();
         },
       };
 
